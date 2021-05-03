@@ -16,7 +16,6 @@
       "name": "YFLink",
       "symbol": "YFL",
       "decimals": 18,
-      "tags": ["base"],
       "logoURI": "https://logos.varen.finance/0x28cb7e841ee97947a86b06fa4090c8451f64c0be.png"
     },
     {
@@ -63,56 +62,6 @@
       "logoURI": "https://logos.varen.finance/0x6b175474e89094c44da98b954eedeac495271d0f.png"
     },
     {
-      "address": "0x5dbcF33D8c2E976c6b560249878e6F1491Bca25c",
-      "chainId": 1,
-      "name": "yearnCurve",
-      "symbol": "yUSD",
-      "decimals": 18,
-      "tags": ["stablecoin"],
-      "logoURI": "https://logos.varen.finance/0x5dbcf33d8c2e976c6b560249878e6f1491bca25c.png"
-    },
-    {
-      "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
-      "chainId": 1,
-      "name": "WrappedBitcoin",
-      "symbol": "WBTC",
-      "decimals": 8,
-      "logoURI": "https://logos.varen.finance/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599.png"
-    },
-    {
-      "address": "0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F",
-      "chainId": 1,
-      "name": "SynthetixNetworkToken",
-      "symbol": "SNX",
-      "decimals": 18,
-      "logoURI": "https://logos.varen.finance/0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f.png"
-    },
-    {
-      "address": "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9",
-      "chainId": 1,
-      "name": "AAVE",
-      "symbol": "AAVE",
-      "decimals": 18,
-      "logoURI": "https://logos.varen.finance/0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9.png"
-    },
-    {
-      "address": "0x4Fabb145d64652a948d72533023f6E7A623C7C53",
-      "chainId": 1,
-      "name": "BUSD",
-      "symbol": "BUSD",
-      "decimals": 18,
-      "tags": ["stablecoin"],
-      "logoURI": "https://logos.varen.finance/0x4fabb145d64652a948d72533023f6e7a623c7c53.png"
-    },
-    {
-      "address": "0xb1dC9124c395c1e97773ab855d66E879f053A289",
-      "chainId": 1,
-      "name": "YAX",
-      "symbol": "YAX",
-      "decimals": 18,
-      "logoURI": "https://logos.varen.finance/0xb1dc9124c395c1e97773ab855d66e879f053a289.png"
-    },
-    {
       "address": "0xaaAEBE6Fe48E54f431b0C390CfaF0b017d09D42d",
       "chainId": 1,
       "name": "CEL",
@@ -138,36 +87,12 @@
       "logoURI": "https://logos.varen.finance/0x06f3c323f0238c72bf35011071f2b5b7f43a054c.png"
     },
     {
-      "address": "0xEdFBd6c48c3dDfF5612Ade14B45bb19F916809ba",
-      "chainId": 1,
-      "name": "RUGZ",
-      "symbol": "RUGZ",
-      "decimals": 18,
-      "logoURI": "https://logos.varen.finance/0xedfbd6c48c3ddff5612ade14b45bb19f916809ba.png"
-    },
-    {
-      "address": "0x6D6506E6F438edE269877a0A720026559110B7d5",
-      "chainId": 1,
-      "name": "BONK",
-      "symbol": "BONK",
-      "decimals": 18,
-      "logoURI": "https://logos.varen.finance/0x6d6506e6f438ede269877a0a720026559110b7d5.png"
-    },
-    {
       "address": "0xb78B3320493a4EFaa1028130C5Ba26f0B6085Ef8",
       "chainId": 1,
       "name": "DRC",
       "symbol": "DRC",
       "decimals": 18,
       "logoURI": "https://logos.varen.finance/0xb78b3320493a4efaa1028130c5ba26f0b6085ef8.png"
-    },
-    {
-      "address": "0x9D47894f8BECB68B9cF3428d256311Affe8B068B",
-      "chainId": 1,
-      "name": "ROPE",
-      "symbol": "ROPE",
-      "decimals": 18,
-      "logoURI": "https://logos.varen.finance/0x9d47894f8becb68b9cf3428d256311affe8b068b.png"
     },
     {
       "address": "0x0fF6ffcFDa92c53F615a4A75D982f399C989366b",
@@ -192,14 +117,6 @@
       "symbol": "DPI",
       "decimals": 18,
       "logoURI": "https://logos.varen.finance/0x1494ca1f11d487c2bbe4543e90080aeba4ba3c2b.png"
-    },
-    {
-      "address": "0x83F873388Cd14b83A9f47FabDe3C9850b5C74548",
-      "chainId": 1,
-      "name": "ZUT",
-      "symbol": "ZUT",
-      "decimals": 18,
-      "logoURI": "https://logos.varen.finance/0x83f873388cd14b83a9f47fabde3c9850b5c74548.png"
     },
     {
       "address": "0x63b4f3e3fa4e438698CE330e365E831F7cCD1eF4",
@@ -307,57 +224,16 @@
       "logoURI": "https://logos.varen.finance/0x8282df223ac402d04b2097d16f758af4f70e7db0.png"
     },
     {
-      "address": "0xDFe66B14D37C77F4E9b180cEb433d1b164f0281D",
-      "chainId": 1,
-      "name": "Staked ETH",
-      "symbol": "stETH",
-      "decimals": 18,
-      "logoURI": "https://logos.varen.finance/0xdfe66b14d37c77f4e9b180ceb433d1b164f0281d.png"
-    },
-    {
-      "address": "0x67B66C99D3Eb37Fa76Aa3Ed1ff33E8e39F0b9c7A",
-      "chainId": 1,
-      "name": "Interest Bearing ETH",
-      "symbol": "ibETH",
-      "decimals": 18,
-      "logoURI": "https://logos.varen.finance/0x67b66c99d3eb37fa76aa3ed1ff33e8e39f0b9c7a.png"
-    },
-    {
       "address": "0x8888801af4d980682e47f1a9036e589479e835c5",
       "chainId": 1,
       "name": "88mph",
       "symbol": "MPH",
       "decimals": 18,
       "logoURI": "https://logos.varen.finance/0x8888801af4d980682e47f1a9036e589479e835c5.png"
-    },
-    {
-      "address": "0x0C49066C0808Ee8c673553B7cbd99BCC9ABf113d",
-      "chainId": 1,
-      "name": "Vesper Finance USDC",
-      "symbol": "vUSDC",
-      "decimals": 18,
-      "tags": ["stablecoin"],
-      "logoURI": "https://logos.varen.finance/0x0c49066c0808ee8c673553b7cbd99bcc9abf113d.png"
-    },
-    {
-      "address": "0x103cc17C2B1586e5Cd9BaD308690bCd0BBe54D5e",
-      "chainId": 1,
-      "name": "Vesper Finance ETH",
-      "symbol": "vETH",
-      "decimals": 18,
-      "logoURI": "https://logos.varen.finance/0x103cc17c2b1586e5cd9bad308690bcd0bbe54d5e.png"
-    },
-    {
-      "address": "0x4B2e76EbBc9f2923d83F5FBDe695D8733db1a17B",
-      "chainId": 1,
-      "name": "Vesper Finance BTC",
-      "symbol": "vBTC",
-      "decimals": 18,
-      "logoURI": "https://logos.varen.finance/0x4b2e76ebbc9f2923d83f5fbde695d8733db1a17b.png"
     }
   ],
   "version": {
-    "major": 4,
+    "major": 1,
     "minor": 0,
     "patch": 0
   }
