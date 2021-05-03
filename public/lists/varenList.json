@@ -1,8 +1,8 @@
 {
-  "name": "LINKSWAP Token List",
+  "name": "Varen Token List",
   "logoURI": "https://logos.varen.finance/vrn.png",
-  "keywords": ["linkswap", "link", "swap"],
-  "timestamp": "2020-03-01T00:00:00+00:00",
+  "keywords": ["varen", "link", "swap"],
+  "timestamp": "2020-05-05T00:00:00+00:00",
   "tags":{
     "base":{"name":"base","description":"baseDescription"},
     "stablecoin":{"name":"stablecoin","description":"stablecoinDescription"},
