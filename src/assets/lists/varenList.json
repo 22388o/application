@@ -1,7 +1,7 @@
 {
   "name": "Varen Token List",
-  "logoURI": "https://logos.varen.finance/vrn.png",
-  "keywords": ["varen", "link", "swap"],
+  "logoURI": "https://logos.varen.finance/0x72377f31e30a405282b522d588aebbea202b4f23.png",
+  "keywords": ["varen", "swap"],
   "timestamp": "2020-05-05T00:00:00+00:00",
   "tags":{
     "base":{"name":"base","description":"baseDescription"},
@@ -10,6 +10,15 @@
     "ren":{"name":"renCoin","description":"renCoinDescription"}
   },
   "tokens": [
+    {
+      "address": "0x72377f31e30a405282b522d588AEbbea202b4f23",
+      "chainId": 1,
+      "name": "Varen",
+      "symbol": "VRN",
+      "decimals": 18,
+      "tags": ["base"],
+      "logoURI": "https://logos.linkswap.app/0x72377f31e30a405282b522d588aebbea202b4f23.png"
+    },
     {
       "address": "0x28cb7e841ee97947a86b06fa4090c8451f64c0be",
       "chainId": 1,
