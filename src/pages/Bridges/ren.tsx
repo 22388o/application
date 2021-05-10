@@ -57,13 +57,6 @@ export default function Ren() {
       url: 'bridges/ren/luna',
       currency0: { symbol: 'LUNA', decimals: renLUNA.decimals },
       currency1: unwrappedToken(renLUNA),
-      inverse: false,
-      type: 'ren'
-    },
-    {
-      url: 'bridges/ren/luna',
-      currency0: { symbol: 'LUNA', decimals: renLUNA.decimals },
-      currency1: unwrappedToken(renLUNA),
       type: 'ren'
     },
     {
