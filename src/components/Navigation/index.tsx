@@ -17,7 +17,7 @@ import { Text } from 'rebass'
 import { ChainId } from '@uniswap/sdk'
 import { useExpertModeManager } from '../../state/user/hooks'
 import { AutoColumn } from '../Column'
-import { LINK } from '../../constants'
+import {LINK, VRN} from '../../constants'
 import Loader from '../Loader'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
@@ -398,7 +398,7 @@ export default function Navigation() {
   const [showLanguages, setShowLanguages] = useState(false)
   const [expertMode] = useExpertModeManager()
   const [userBalances, fetchingUserBalances] = useTokenBalancesWithLoadingIndicator(account ?? undefined, [
-    LINK
+    LINK, VRN
   ])
   const { t } = useTranslation()
   const history = useHistory()
@@ -532,6 +532,20 @@ export default function Navigation() {
                         ) : (
                           <BalanceText>
                             {displayNumber(userBalances[LINK.address]?.toSignificant(6)) + ' ' + LINK.symbol}
+                          </BalanceText>
+                        )}
+                      </RowBetween>
+                    </>
+                  )}
+                  {userBalances && (
+                    <>
+                      <RowBetween>
+                        <Text>{VRN.name}:</Text>
+                        {fetchingUserBalances ? (
+                          <Loader />
+                        ) : (
+                          <BalanceText>
+                            {displayNumber(userBalances[VRN.address]?.toSignificant(6)) + ' ' + VRN.symbol}
                           </BalanceText>
                         )}
                       </RowBetween>
