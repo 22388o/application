@@ -84,7 +84,7 @@ export default function Swap() {
     useCurrency(loadedUrlParams?.outputCurrencyId)
   ]
 
-  const currentList = useTokenList('https://linkswap.app/lists/linkswapList.json')
+  const currentList = useTokenList('https://varen.exchange/lists/varenList.json')
 
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
@@ -367,8 +367,8 @@ export default function Swap() {
 
   let currentURL =
     currentInput !== 'ETH'
-      ? `https://linkswap.app/#/swap/?inputCurrency=${currentInput}`
-      : 'https://linkswap.app/#/swap'
+      ? `https://varen.exchange/#/swap/?inputCurrency=${currentInput}`
+      : 'https://varen.exchange/#/swap'
 
   if (currentOutput) {
     currentURL += currentInput !== 'ETH' ? `&outputCurrency=${currentOutput}` : `?outputCurrency=${currentOutput}`
