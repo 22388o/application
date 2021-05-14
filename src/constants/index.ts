@@ -432,15 +432,6 @@ export const SINGLE_POOLS: Record<string, any> = {
     abi: 'scrtPool',
     type: 'scrt'
   },
-  SECRETYFL: {
-    rewardsAddress: 'secret1ra9l5p04sc4pu8vc5djr3c9ds7npmwmzvsee32',
-    tokens: [secretYFL, YFL],
-    stakedToken: stakedSecretYFL,
-    rewardsToken: secretSCRT,
-    balance: 0,
-    abi: 'scrtPool',
-    type: 'scrt'
-  }
 }
 
 export const NetworkContextName = 'NETWORK'
