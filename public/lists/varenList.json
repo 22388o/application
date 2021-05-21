@@ -2,7 +2,7 @@
   "name": "Varen Token List",
   "logoURI": "https://logos.varen.finance/0x72377f31e30a405282b522d588aebbea202b4f23.png",
   "keywords": ["varen", "swap"],
-  "timestamp": "2020-05-14T00:00:00+00:00",
+  "timestamp": "2021-05-14T00:00:00+00:00",
   "tags":{
     "base":{"name":"base","description":"baseDescription"},
     "stablecoin":{"name":"stablecoin","description":"stablecoinDescription"},
