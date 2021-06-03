@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@CoinSpace/bitcore-lib-dogecoin@github:CoinSpace/bitcore-lib-dogecoin":
+"@CoinSpace/bitcore-lib-dogecoin@CoinSpace/bitcore-lib-dogecoin":
   version "8.1.2"
   resolved "https://codeload.github.com/CoinSpace/bitcore-lib-dogecoin/tar.gz/cf8b3f663d6f065c12a643d8eb7c9e7b7f516bf1"
   dependencies:
@@ -2353,15 +2353,15 @@
     redux-thunk "^2.3.0"
     reselect "^4.0.0"
 
-"@renproject/chains-bitcoin@^2.1.9":
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/@renproject/chains-bitcoin/-/chains-bitcoin-2.1.9.tgz#e78529f3904c63b821311dfa38e066fc9cb3a5ee"
-  integrity sha512-Qa7BUTvhnhOuTQgEyvCOvnJbhlBY+sKcEIUGMwutpTTgtq+vohdSnLIurqcmA6442jSlsUeFeHK5A+KVvsXIVQ==
+"@renproject/chains-bitcoin@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@renproject/chains-bitcoin/-/chains-bitcoin-2.3.0.tgz#90b133e419074ec3fc221364e153bb953d42167e"
+  integrity sha512-wKvO0OpImkN1DPs/nUCQfDOI+7Xs7jLNYvNh0XNaMFSccC7FhoXdV9gjXl2fMGInCQjpSMdeP5GI28Zh4j8r4Q==
   dependencies:
     "@CoinSpace/bitcore-lib-dogecoin" CoinSpace/bitcore-lib-dogecoin
-    "@renproject/interfaces" "^2.1.9"
-    "@renproject/rpc" "^2.1.9"
-    "@renproject/utils" "^2.1.9"
+    "@renproject/interfaces" "^2.3.0"
+    "@renproject/rpc" "^2.3.0"
+    "@renproject/utils" "^2.3.0"
     "@types/bs58" "^4.0.1"
     "@types/cashaddrjs" "^0.3.0"
     "@types/node" ">=10"
@@ -2375,13 +2375,13 @@
     cashaddrjs "^0.4.4"
     wallet-address-validator "^0.2.4"
 
-"@renproject/chains-ethereum@^2.1.9":
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/@renproject/chains-ethereum/-/chains-ethereum-2.1.9.tgz#497ef6eac60d4dc600eac6f9bbfae49c93a7c6ed"
-  integrity sha512-jsl3xzUSD+U/dYEyr+AfukkMGCui5ZCRk/ExauFZja6BmqtiBQygASnPATubPQeF6Bo9GtYSmOGqyMt6yH4mjw==
+"@renproject/chains-ethereum@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@renproject/chains-ethereum/-/chains-ethereum-2.3.0.tgz#101b2677af553c1d61647cbfe4e01994519a077a"
+  integrity sha512-eNIWT6pfXaboEa+neluXXaLE20ZjLVwa4bCnarAf3ronN1S/wIFhtrQ3ioX7AKtkZgvv/RzLZB78Khk3ko4bGQ==
   dependencies:
-    "@renproject/interfaces" "^2.1.9"
-    "@renproject/utils" "^2.1.9"
+    "@renproject/interfaces" "^2.3.0"
+    "@renproject/utils" "^2.3.0"
     "@types/bn.js" "^5.1.0"
     "@types/node" ">=10"
     bignumber.js "^9.0.1"
@@ -2395,16 +2395,16 @@
     web3-providers "^2.0.0-alpha.1"
     web3-utils "^2.0.0-alpha.1"
 
-"@renproject/chains-filecoin@^2.1.9":
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/@renproject/chains-filecoin/-/chains-filecoin-2.1.9.tgz#71e84d7ddfec1539973677e5dd7d43dd23a69357"
-  integrity sha512-jLMHpKOkrRId3MtBBaYM0GE6mCoNRogblU882LHSCvH+RAIu7CGRHoXQdwsJyFtQQA/CxKiyMkzZn4jXwXA4Iw==
+"@renproject/chains-filecoin@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@renproject/chains-filecoin/-/chains-filecoin-2.3.0.tgz#574a873b5889c1c0b80939265f7314741774df73"
+  integrity sha512-wOdGrEeOOuB5i9vceZWpEFRNp3Xez5b/POBPfmoCAJ8GHhmwTNfTVX5OOZ1IPSwD/HqKbC9m58X8Fcl6/DDxow==
   dependencies:
     "@glif/filecoin-address" "^1.1.0"
     "@glif/filecoin-rpc-client" "^1.1.0"
-    "@renproject/interfaces" "^2.1.9"
-    "@renproject/rpc" "^2.1.9"
-    "@renproject/utils" "^2.1.9"
+    "@renproject/interfaces" "^2.3.0"
+    "@renproject/rpc" "^2.3.0"
+    "@renproject/utils" "^2.3.0"
     "@types/elliptic" "^6.4.12"
     "@types/node" ">=10"
     bignumber.js "^9.0.1"
@@ -2412,14 +2412,14 @@
     cids "^1.1.6"
     elliptic "^6.5.4"
 
-"@renproject/chains-terra@^2.1.10":
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/@renproject/chains-terra/-/chains-terra-2.1.10.tgz#97a64dd0560e72311fbae5574d80fa733d761c4e"
-  integrity sha512-b0VfN1COUF7TAwrlgwDDEFGKZtpGR0CcsoKARLwf52RQYgsifSvTscjSd8UtiXliwI5H5eZet6aaK4XPZH/Dyw==
+"@renproject/chains-terra@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@renproject/chains-terra/-/chains-terra-2.3.0.tgz#7d6e738406bb9ac8360a7043b3fe9b65ae862d4c"
+  integrity sha512-df8HtdSrzO3V5MT+zqKpFUpXnHerxfWqEf08MnBF0WBqAzHArKn0Hv4Vt4Ui5DjweTdhISUGUvXRKzaTtYwv8w==
   dependencies:
-    "@renproject/interfaces" "^2.1.9"
-    "@renproject/rpc" "^2.1.9"
-    "@renproject/utils" "^2.1.9"
+    "@renproject/interfaces" "^2.3.0"
+    "@renproject/rpc" "^2.3.0"
+    "@renproject/utils" "^2.3.0"
     "@terra-money/terra.js" "1.3.6"
     "@types/elliptic" "^6.4.12"
     "@types/node" ">=10"
@@ -2428,16 +2428,16 @@
     blakejs "^1.1.0"
     elliptic "^6.5.3"
 
-"@renproject/chains@^2.1.10":
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/@renproject/chains/-/chains-2.1.10.tgz#5f08bfcb6ade354bab89b7f72d177cad4ebecd74"
-  integrity sha512-m13akNZtUoBjV0rFAqrutifDliGxDHhNHddGNm98F1nwWlGfuK3uH+NyJzsOUz8frPwGt33oKTp601p/OpVywg==
+"@renproject/chains@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@renproject/chains/-/chains-2.3.0.tgz#ff38be0c9874ba46023f23c4265483f137c35369"
+  integrity sha512-sgsBO7tuYRXceRmvyZ+T63SUctQBv1RNXIUhac1eChWO701PLDOfWeMR9iU0X6/eDhFSo88l9cR/YeRVlWgA/g==
   dependencies:
-    "@renproject/chains-bitcoin" "^2.1.9"
-    "@renproject/chains-ethereum" "^2.1.9"
-    "@renproject/chains-filecoin" "^2.1.9"
-    "@renproject/chains-terra" "^2.1.10"
-    "@renproject/interfaces" "^2.1.9"
+    "@renproject/chains-bitcoin" "^2.3.0"
+    "@renproject/chains-ethereum" "^2.3.0"
+    "@renproject/chains-filecoin" "^2.3.0"
+    "@renproject/chains-terra" "^2.3.0"
+    "@renproject/interfaces" "^2.3.0"
     "@types/node" ">=10"
 
 "@renproject/fonts@^1.0.1":
@@ -2445,22 +2445,22 @@
   resolved "https://registry.yarnpkg.com/@renproject/fonts/-/fonts-1.0.2.tgz#306ea985610b559fb6147f091efce567cbb25d35"
   integrity sha512-mAU1JnrE0u3g+103baJwZf81Zz5s6MvO8zDoFtpE3qJQ9zNEssCdgTA57Jjvk1WNLTIY/JDSWPLYcpmrVlGiCQ==
 
-"@renproject/interfaces@^2.1.9":
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/@renproject/interfaces/-/interfaces-2.1.9.tgz#065803eb33327786b8dbfb3309f4385a0bbeecc8"
-  integrity sha512-qofWuPw4d26Uo7nxML8xscAylGaYMQrh9q8OjVYHpwzyv3FayMxD5lJQgivNUgbCjswHPrJWLnvGiPccQ1+WKQ==
+"@renproject/interfaces@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@renproject/interfaces/-/interfaces-2.3.0.tgz#3ba4780a61919a61181493b8b2ff87a3caa10f28"
+  integrity sha512-iWFKYm3QDHXh0rtWhpiGFlWbhiE0BALUHSg07DTNCTxtOGUcI52bI+ONHK205u+Z54c197Adv4+9/pGROi69BQ==
   dependencies:
     "@types/node" ">=10"
     bignumber.js "^9.0.1"
     web3-core "^2.0.0-alpha.1"
 
-"@renproject/provider@^2.1.9":
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/@renproject/provider/-/provider-2.1.9.tgz#e61cece1f6f7ca1d52b9e9201c07300c3f53bd28"
-  integrity sha512-bIpwMxP3YvOxparpRdBw6OXEx2NYxv4GGVM9SUIU1klfjEnc4F07ia11lhXNWQrwytI/3kMO7FuOyCWajZwYVQ==
+"@renproject/provider@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@renproject/provider/-/provider-2.3.0.tgz#041777830e53214de4f8233f817954ebb4739ac9"
+  integrity sha512-rb5UaEbWIjHV3pKj/WnGWqhtpNUzIDZBcaBmJfndPsyoMkztyagP6DCI3fClmTLcsiQJnvYRl+UaQ7bzLNMY/A==
   dependencies:
-    "@renproject/interfaces" "^2.1.9"
-    "@renproject/utils" "^2.1.9"
+    "@renproject/interfaces" "^2.3.0"
+    "@renproject/utils" "^2.3.0"
     "@types/node" ">=10"
     axios "^0.21.1"
     immutable "^4.0.0-rc.12"
@@ -2482,15 +2482,15 @@
     react-router-dom "^5.1.2"
     react-select "^3.1.0"
 
-"@renproject/ren@^2.1.9":
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/@renproject/ren/-/ren-2.1.9.tgz#cd119f1a1379e55099bcd0470b65244a57b37158"
-  integrity sha512-X6UlFeXlzQICCzUVDpp0lHnNxuP24kCcQa5ID1u3PixnS5pXzTMsxwzdbtexPatEbDYsBnQBCukWVsHMqLNv7A==
+"@renproject/ren@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@renproject/ren/-/ren-2.3.0.tgz#6828f9b9c21093f97ad91b9918f6db293d6462fe"
+  integrity sha512-UOBjgbEIRs0e5grFc0PSbhRMv/5dmbOp4k10YTntslLWsfNXeoP6p1KZOHk4wAYTec2PcMkrpGmfICr3V/q3sA==
   dependencies:
-    "@renproject/interfaces" "^2.1.9"
-    "@renproject/provider" "^2.1.9"
-    "@renproject/rpc" "^2.1.9"
-    "@renproject/utils" "^2.1.9"
+    "@renproject/interfaces" "^2.3.0"
+    "@renproject/provider" "^2.3.0"
+    "@renproject/rpc" "^2.3.0"
+    "@renproject/utils" "^2.3.0"
     "@types/bn.js" "^5.1.0"
     "@types/node" ">=10"
     bignumber.js "^9.0.1"
@@ -2498,24 +2498,24 @@
     immutable "^4.0.0-rc.12"
     web3-eth-abi "^2.0.0-alpha.1"
 
-"@renproject/rpc@^2.1.9":
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/@renproject/rpc/-/rpc-2.1.9.tgz#0a2636f0069d1d5fac84309aba4077af744353ca"
-  integrity sha512-zmtPK5DPIqj8KYfM6v0hjE9l+ro2EDNgj332KT54YGK4k9aiWWHA74JznkwYRvXXpAQjGL+ptykc+ZT5rSX3SQ==
+"@renproject/rpc@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@renproject/rpc/-/rpc-2.3.0.tgz#a6310fe1e52331be852c53908bc47ffa3f216de9"
+  integrity sha512-A1av/8dOMl0iVy8Tl/elVFe45ke35aRhqZtqzTmH6NP3OmwbZ2UkPepug3RcsklENK7pEBCbz59uGAvPWnBbMA==
   dependencies:
-    "@renproject/interfaces" "^2.1.9"
-    "@renproject/provider" "^2.1.9"
-    "@renproject/utils" "^2.1.9"
+    "@renproject/interfaces" "^2.3.0"
+    "@renproject/provider" "^2.3.0"
+    "@renproject/utils" "^2.3.0"
     "@types/node" ">=10"
     bignumber.js "^9.0.1"
     immutable "^4.0.0-rc.12"
 
-"@renproject/utils@^2.1.9":
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/@renproject/utils/-/utils-2.1.9.tgz#a4f3a7fbd75466180909b3367ff1635cbe4be8f3"
-  integrity sha512-2VQZuG7ItpePuEtQrEHWAVh5IMzon84SV+//8kJ72xQyzez6CQkckVWHwMZEj8Dm7ExwsRZv0t5PLhkB6/WKSQ==
+"@renproject/utils@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@renproject/utils/-/utils-2.3.0.tgz#eabb3f55c7a0cde793e3ce322ec99962191d6577"
+  integrity sha512-D6CHxJjqQ/S1JzCCB1ZJoRAxxJiazy1sECFaSK5B9TDzaEX1kyQFtFQFd8u2PfVMEwQELB2wROtDZ/3JHj5CLQ==
   dependencies:
-    "@renproject/interfaces" "^2.1.9"
+    "@renproject/interfaces" "^2.3.0"
     "@types/create-hash" "1.2.2"
     "@types/keccak" "^3.0.1"
     "@types/mocha" "^8.2.0"
@@ -5092,7 +5092,7 @@ bitcore-lib-cash@^8.24.2:
     inherits "=2.0.1"
     lodash "^4.17.20"
 
-"bitcore-lib-zcash@github:zcash-hackworks/bitcore-lib-zcash":
+bitcore-lib-zcash@zcash-hackworks/bitcore-lib-zcash:
   version "0.13.19"
   resolved "https://codeload.github.com/zcash-hackworks/bitcore-lib-zcash/tar.gz/e97ae1dd2e9f14d6076d5e5429c75d8965afa4ab"
   dependencies:
@@ -5677,7 +5677,7 @@ cashaddrjs@0.4.4, cashaddrjs@^0.4.4:
   dependencies:
     big-integer "1.6.36"
 
-"chai-bignumber@github:ren-forks/chai-bignumber#afa6f46dcbef0b7e622dc27b9b3354fc67afafbc":
+chai-bignumber@ren-forks/chai-bignumber#afa6f46dcbef0b7e622dc27b9b3354fc67afafbc:
   version "2.0.2"
   resolved "https://codeload.github.com/ren-forks/chai-bignumber/tar.gz/afa6f46dcbef0b7e622dc27b9b3354fc67afafbc"
 
