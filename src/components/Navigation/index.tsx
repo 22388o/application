@@ -17,7 +17,7 @@ import { Text } from 'rebass'
 import { ChainId } from '@uniswap/sdk'
 import { useExpertModeManager } from '../../state/user/hooks'
 import { AutoColumn } from '../Column'
-import {LINK, VRN} from '../../constants'
+import { LINK, VRN } from '../../constants'
 import Loader from '../Loader'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
@@ -397,9 +397,7 @@ export default function Navigation() {
   const [showThemes, setShowThemes] = useState(false)
   const [showLanguages, setShowLanguages] = useState(false)
   const [expertMode] = useExpertModeManager()
-  const [userBalances, fetchingUserBalances] = useTokenBalancesWithLoadingIndicator(account ?? undefined, [
-    LINK, VRN
-  ])
+  const [userBalances, fetchingUserBalances] = useTokenBalancesWithLoadingIndicator(account ?? undefined, [LINK, VRN])
   const { t } = useTranslation()
   const history = useHistory()
   const goTo = (path: string) => {
@@ -694,6 +692,11 @@ export default function Navigation() {
               <SubNavigationElement>
                 <StyledNavLink id={'stake'} to={'/stake'} isActive={() => active === 'stake'}>
                   <NavLabel>{t('allPools')}</NavLabel>
+                </StyledNavLink>
+              </SubNavigationElement>
+              <SubNavigationElement>
+                <StyledNavLink id={'stake'} to={'/stake/gov'} isActive={() => active === 'stake-governance'}>
+                  <NavLabel>{t('stakeGovernance')}</NavLabel>
                 </StyledNavLink>
               </SubNavigationElement>
               <SubNavigationElement>

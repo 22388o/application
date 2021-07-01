@@ -11,7 +11,7 @@ import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import { SwapPoolTabs } from '../../components/NavigationTabs'
 import { RowBetween } from '../../components/Row'
 import { useTranslation } from 'react-i18next'
-import { ACTIVE_REWARD_POOLS, SINGLE_POOLS, UNI_POOLS, YFL, yYFL } from '../../constants'
+import { ACTIVE_REWARD_POOLS, SINGLE_POOLS, UNI_POOLS, VRN, yVRN } from '../../constants'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency, useToken } from '../../hooks/Tokens'
 import { useWalletModalToggle } from '../../state/application/hooks'
@@ -103,7 +103,7 @@ export default function Unstake({
       }
     } else if (isSingle) {
       const singlePool = SINGLE_POOLS[currencyIdB?.toUpperCase() ?? 'ETH']
-      liquidityToken = typeof singlePool !== 'undefined' ? singlePool.tokens[0] : YFL
+      liquidityToken = typeof singlePool !== 'undefined' ? singlePool.tokens[0] : VRN
       liquidityTokenAddress = liquidityToken.address
       if (!found) {
         if (typeof singlePool !== 'undefined') {
@@ -187,7 +187,7 @@ export default function Unstake({
 
   const addTransaction = useTransactionAdder()
   const { t } = useTranslation()
-  const [yYflBalance, fetchingyYflBalance] = useTokenBalancesWithLoadingIndicator(account ?? undefined, [yYFL])
+  const [yYflBalance, fetchingyYflBalance] = useTokenBalancesWithLoadingIndicator(account ?? undefined, [yVRN])
 
   const { [Field.CURRENCY_A]: parsedAmountA } = parsedAmounts
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, liquidityToken ?? undefined)
@@ -303,8 +303,8 @@ export default function Unstake({
   }, [account, liquidityToken, chainId, library, currentAbi, pool.rewardsAddress, found, isGov])
 
   if (userBalance === 0 && !fetchingyYflBalance) {
-    if (typeof yYflBalance[yYFL.address] !== 'undefined') {
-      const currentYYflBalance = yYflBalance[yYFL.address]?.toSignificant(6) ?? 0
+    if (typeof yYflBalance[yVRN.address] !== 'undefined') {
+      const currentYYflBalance = yYflBalance[yVRN.address]?.toSignificant(6) ?? 0
       setUserBalance(Number(currentYYflBalance))
     }
   }

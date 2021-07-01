@@ -14,6 +14,8 @@ import { V1_EXCHANGE_ABI, V1_FACTORY_ABI, V1_FACTORY_ADDRESSES } from '../consta
 import { getContract } from '../utils'
 
 import { useActiveWeb3React } from './index'
+import { VRN } from '../constants'
+import { ERC677_ABI } from '../constants/abis/erc677'
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -44,7 +46,8 @@ export function useV1ExchangeContract(address?: string, withSignerIfPossible?: b
 }
 
 export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
-  return useContract(tokenAddress, ERC20_ABI, withSignerIfPossible)
+  const ABI = tokenAddress === VRN.address ? ERC677_ABI : ERC20_ABI
+  return useContract(tokenAddress, ABI, withSignerIfPossible)
 }
 
 export function useWETHContract(withSignerIfPossible?: boolean): Contract | null {

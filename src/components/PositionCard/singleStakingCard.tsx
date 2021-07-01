@@ -29,7 +29,7 @@ import { TransactionResponse } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import ReactGA from 'react-ga'
 import { useTransactionAdder } from '../../state/transactions/hooks'
-import { SINGLE_POOLS, yYFL } from '../../constants'
+import { SINGLE_POOLS, yVRN } from '../../constants'
 import Web3 from 'web3'
 
 const StakingCard = styled(Card)<{ highlight?: boolean; show?: boolean }>`
@@ -423,7 +423,7 @@ export default function SingleStakingCard({
     const govContract = getContract(SINGLE_POOLS.GOV.rewardsAddress, governancePool, fakeLibrary, fakeAccount)
     const getPricePerFullShareMethod: (...args: any) => Promise<BigNumber> = govContract.getPricePerFullShare
     getPricePerFullShareMethod().then(response => {
-      setYyflPrice(hexStringToNumber(response.toHexString(), yYFL.decimals))
+      setYyflPrice(hexStringToNumber(response.toHexString(), yVRN.decimals))
       const web3 = new Web3(new Web3.providers.HttpProvider(NETWORK_URL))
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
@@ -432,7 +432,7 @@ export default function SingleStakingCard({
         .getPricePerFullShare()
         .call({}, lastMonthBlockNumber)
         .then((response: any) => {
-          const yyflPriceLastMonth = hexStringToNumber(response.toHexString(), yYFL.decimals)
+          const yyflPriceLastMonth = hexStringToNumber(response.toHexString(), yVRN.decimals)
           const priceDifference = yyflPrice - yyflPriceLastMonth
           const percentageDifference = (priceDifference / ((yyflPriceLastMonth + yyflPrice) / 2)) * 100
           const dailyPercentage = percentageDifference / numberOfDaysForApy
