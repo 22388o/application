@@ -17,7 +17,7 @@ import { Text } from 'rebass'
 import { ChainId } from '@uniswap/sdk'
 import { useExpertModeManager } from '../../state/user/hooks'
 import { AutoColumn } from '../Column'
-import { LINK, VRN } from '../../constants'
+import { LINK, VRN, yVRN } from '../../constants'
 import Loader from '../Loader'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
@@ -397,7 +397,7 @@ export default function Navigation() {
   const [showThemes, setShowThemes] = useState(false)
   const [showLanguages, setShowLanguages] = useState(false)
   const [expertMode] = useExpertModeManager()
-  const [userBalances, fetchingUserBalances] = useTokenBalancesWithLoadingIndicator(account ?? undefined, [LINK, VRN])
+  const [userBalances, fetchingUserBalances] = useTokenBalancesWithLoadingIndicator(account ?? undefined, [VRN, yVRN])
   const { t } = useTranslation()
   const history = useHistory()
   const goTo = (path: string) => {
@@ -524,12 +524,12 @@ export default function Navigation() {
                   {userBalances && (
                     <>
                       <RowBetween>
-                        <Text>{LINK.name}:</Text>
+                        <Text>{VRN.name}:</Text>
                         {fetchingUserBalances ? (
                           <Loader />
                         ) : (
                           <BalanceText>
-                            {displayNumber(userBalances[LINK.address]?.toSignificant(6)) + ' ' + LINK.symbol}
+                            {displayNumber(userBalances[VRN.address]?.toSignificant(6)) + ' ' + VRN.symbol}
                           </BalanceText>
                         )}
                       </RowBetween>
@@ -538,12 +538,12 @@ export default function Navigation() {
                   {userBalances && (
                     <>
                       <RowBetween>
-                        <Text>{VRN.name}:</Text>
+                        <Text>{yVRN.name}:</Text>
                         {fetchingUserBalances ? (
                           <Loader />
                         ) : (
                           <BalanceText>
-                            {displayNumber(userBalances[VRN.address]?.toSignificant(6)) + ' ' + VRN.symbol}
+                            {displayNumber(userBalances[yVRN.address]?.toSignificant(6)) + ' ' + yVRN.symbol}
                           </BalanceText>
                         )}
                       </RowBetween>
