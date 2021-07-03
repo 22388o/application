@@ -132,7 +132,7 @@ async function getBlockCountDown(targetBlock: number) {
 async function getIncomingTransactions(senderAddress: string) {
   const ethAPIKey = ETH_API_KEYS[Math.floor(Math.random() * ETH_API_KEYS.length)]
   try {
-    const url = `https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x0063fCe4D9ebb2e90Cb85cD2755ee7c34E897024&address=${senderAddress}&startblock=0&endblock=999999999&sort=desc&apikey=${ethAPIKey}`
+    const url = `https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x80Ad276cce240A8C4ad05c589557482fFD729755&address=${senderAddress}&startblock=0&endblock=999999999&sort=desc&apikey=${ethAPIKey}`
     const response = await fetch(url, {
       headers: {
         Accept: 'application/json',
@@ -182,7 +182,7 @@ export default function StakeGovernance() {
   const lastBlockNumber = useBlockNumber()
   const numberOfDaysForApy = 60
   const lastMonthBlockNumber = lastBlockNumber ? lastBlockNumber - numberOfDaysForApy * 6408 : 0
-  const startDate = moment('06-30-2021', 'MM-DD-YYYY')
+  const startDate = moment('07-02-2021', 'MM-DD-YYYY')
   const daysSinceStart = moment().diff(startDate, 'days')
   const vrnStartPrice = 1
   const hasVrn = Number(userBalances[VRN.address]?.toSignificant(1)) > 0
@@ -286,14 +286,14 @@ export default function StakeGovernance() {
           {t('stakeGovernanceLastDistribution', { days: daysSinceLastDistribution })}
         </Text>
 
-        {apy !== 0 && (
+        {apy > 0.1 && (
           <>
             <BlueCard style={{ margin: '24px 0 12px' }}>
               <Text textAlign="center" fontSize={12} fontWeight={400}>
                 {t('currentEstimatedAPY')}
               </Text>
               <Text textAlign="center" fontSize={30} fontWeight={700}>
-                {numberToPercent(apy > 0.1 ? apy : 0)}
+                {numberToPercent(apy)}
               </Text>
             </BlueCard>
             <Text fontSize="12px" color={theme.textSecondary}>
@@ -337,11 +337,11 @@ export default function StakeGovernance() {
                 </BalanceText>
               </RowBetween>
             )}
-            {totalApy !== 0 && (
+            {totalApy > 0.1 && (
               <>
                 <RowBetween>
                   <Text textAlign="center">{t('currentEstimatedTotalAPY')}</Text>
-                  <BalanceText>{numberToPercent(totalApy > 0.1 ? totalApy : 0)}</BalanceText>
+                  <BalanceText>{numberToPercent(totalApy)}</BalanceText>
                 </RowBetween>
                 <RowBetween>
                   <Text fontSize="12px" color={theme.textSecondary}>

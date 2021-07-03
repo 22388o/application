@@ -252,7 +252,7 @@ export const vBTC = new Token(
 )
 
 export const VRN = new Token(ChainId.MAINNET, '0x72377f31e30a405282b522d588AEbbea202b4f23', 18, 'VRN', 'Varen')
-export const yVRN = new Token(ChainId.MAINNET, '0x0063fCe4D9ebb2e90Cb85cD2755ee7c34E897024', 18, 'yVRN', 'Staked Varen')
+export const yVRN = new Token(ChainId.MAINNET, '0x80Ad276cce240A8C4ad05c589557482fFD729755', 18, 'yVRN', 'Staked Varen')
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
@@ -412,7 +412,7 @@ export const UNI_POOLS = {
 
 export const SINGLE_POOLS: Record<string, any> = {
   GOV: {
-    rewardsAddress: '0x0063fCe4D9ebb2e90Cb85cD2755ee7c34E897024',
+    rewardsAddress: '0x80Ad276cce240A8C4ad05c589557482fFD729755',
     tokens: [VRN, WETHER],
     stakedToken: yVRN,
     balance: 0,

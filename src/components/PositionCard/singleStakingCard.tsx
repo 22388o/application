@@ -29,7 +29,7 @@ import { TransactionResponse } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import ReactGA from 'react-ga'
 import { useTransactionAdder } from '../../state/transactions/hooks'
-import { SINGLE_POOLS, yVRN } from '../../constants'
+import { SINGLE_POOLS, VRN, yVRN } from '../../constants'
 import Web3 from 'web3'
 
 const StakingCard = styled(Card)<{ highlight?: boolean; show?: boolean }>`
@@ -168,7 +168,7 @@ export default function SingleStakingCard({
   })
   const [fetching, setFetching] = useState(false)
   const [subGraphFetching, setSubGraphFetching] = useState(false)
-  const [yyflPrice, setYyflPrice] = useState(1)
+  const [yVrnPrice, setYVrnPrice] = useState(1)
   const isGov = information.poolType === 'gov'
   const lastBlockNumber = useBlockNumber()
   const numberOfDaysForApy = 60
@@ -220,7 +220,7 @@ export default function SingleStakingCard({
     }
   } else {
     if (isGov && priceObject) {
-      information.poolTokenPrices[0] = priceObject['yflPriceBase']
+      information.poolTokenPrices[0] = tokenPrices[VRN.address.toLowerCase()].price
     } else {
       if (tokenPrices && information.stakePoolTotalDeposited === 0) {
         const token0id = values.tokens[0].address.toLowerCase()
@@ -423,7 +423,7 @@ export default function SingleStakingCard({
     const govContract = getContract(SINGLE_POOLS.GOV.rewardsAddress, governancePool, fakeLibrary, fakeAccount)
     const getPricePerFullShareMethod: (...args: any) => Promise<BigNumber> = govContract.getPricePerFullShare
     getPricePerFullShareMethod().then(response => {
-      setYyflPrice(hexStringToNumber(response.toHexString(), yVRN.decimals))
+      setYVrnPrice(hexStringToNumber(response.toHexString(), yVRN.decimals))
       const web3 = new Web3(new Web3.providers.HttpProvider(NETWORK_URL))
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
@@ -432,9 +432,12 @@ export default function SingleStakingCard({
         .getPricePerFullShare()
         .call({}, lastMonthBlockNumber)
         .then((response: any) => {
-          const yyflPriceLastMonth = hexStringToNumber(response.toHexString(), yVRN.decimals)
-          const priceDifference = yyflPrice - yyflPriceLastMonth
-          const percentageDifference = (priceDifference / ((yyflPriceLastMonth + yyflPrice) / 2)) * 100
+          let yVrnPriceLastMonth = 1
+          if (response !== null) {
+            yVrnPriceLastMonth = hexStringToNumber(response.toHexString(), yVRN.decimals)
+          }
+          const priceDifference = yVrnPrice - yVrnPriceLastMonth
+          const percentageDifference = (priceDifference / ((yVrnPriceLastMonth + yVrnPrice) / 2)) * 100
           const dailyPercentage = percentageDifference / numberOfDaysForApy
           information.apy = dailyPercentage * 365
           setTimeout(function() {
@@ -484,7 +487,11 @@ export default function SingleStakingCard({
                     )}
                   </>
                 ) : (
-                  <>{information.poolType !== 'mph88' && !information.notStarted && <Dots>{t('loading')}</Dots>}</>
+                  <>
+                    {information.poolType !== 'mph88' && information.poolType !== 'gov' && !information.notStarted && (
+                      <Dots>{t('loading')}</Dots>
+                    )}
+                  </>
                 )}
               </div>
             )}
@@ -556,11 +563,11 @@ export default function SingleStakingCard({
                           <Text>{t('stakedTokenAmount')}</Text>
                           {numberToSignificant(information.userBalance, 1) > 1000 ? (
                             <Text>
-                              {numberToSignificant(information.userBalance * yyflPrice)} {currencyA.symbol}
+                              {numberToSignificant(information.userBalance * yVrnPrice)} {currencyA.symbol}
                             </Text>
                           ) : (
                             <Text>
-                              {numberToSignificant(information.userBalance * yyflPrice, 10)} {currencyA.symbol}
+                              {numberToSignificant(information.userBalance * yVrnPrice, 10)} {currencyA.symbol}
                             </Text>
                           )}
                         </RowBetween>
