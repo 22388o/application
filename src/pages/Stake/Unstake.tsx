@@ -187,7 +187,7 @@ export default function Unstake({
 
   const addTransaction = useTransactionAdder()
   const { t } = useTranslation()
-  const [yYflBalance, fetchingyYflBalance] = useTokenBalancesWithLoadingIndicator(account ?? undefined, [yVRN])
+  const [yVrnBalance, fetchingyVrnBalance] = useTokenBalancesWithLoadingIndicator(account ?? undefined, [yVRN])
 
   const { [Field.CURRENCY_A]: parsedAmountA } = parsedAmounts
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, liquidityToken ?? undefined)
@@ -302,10 +302,10 @@ export default function Unstake({
     }
   }, [account, liquidityToken, chainId, library, currentAbi, pool.rewardsAddress, found, isGov])
 
-  if (userBalance === 0 && !fetchingyYflBalance) {
-    if (typeof yYflBalance[yVRN.address] !== 'undefined') {
-      const currentYYflBalance = yYflBalance[yVRN.address]?.toSignificant(6) ?? 0
-      setUserBalance(Number(currentYYflBalance))
+  if (userBalance === 0 && !fetchingyVrnBalance) {
+    if (typeof yVrnBalance[yVRN.address] !== 'undefined') {
+      const currentYVrnBalance = yVrnBalance[yVRN.address]?.toSignificant(6) ?? 0
+      setUserBalance(Number(currentYVrnBalance))
     }
   }
 
