@@ -30,7 +30,6 @@ export const sYFL = new Token(
   'sYFL',
   'YFLink Synthetic'
 )
-export const yYFL = new Token(ChainId.MAINNET, '0x75d1aa733920b14fc74c9f6e6fab7ac1ece8482e', 18, 'yYFL', 'Staked YFL')
 export const WETHER = new Token(
   ChainId.MAINNET,
   '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
@@ -253,7 +252,7 @@ export const vBTC = new Token(
 )
 
 export const VRN = new Token(ChainId.MAINNET, '0x72377f31e30a405282b522d588AEbbea202b4f23', 18, 'VRN', 'Varen')
-
+export const yVRN = new Token(ChainId.MAINNET, '0x80Ad276cce240A8C4ad05c589557482fFD729755', 18, 'yVRN', 'Staked Varen')
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
@@ -412,6 +411,14 @@ export const UNI_POOLS = {
 }
 
 export const SINGLE_POOLS: Record<string, any> = {
+  GOV: {
+    rewardsAddress: '0x80Ad276cce240A8C4ad05c589557482fFD729755',
+    tokens: [VRN, WETHER],
+    stakedToken: yVRN,
+    balance: 0,
+    abi: 'governancePool',
+    type: 'gov'
+  },
   ALINKV1: {
     rewardsAddress: '0x904f81eff3c35877865810cca9a63f2d9cb7d4dd',
     poolAddress: '0x904f81eff3c35877865810cca9a63f2d9cb7d4dd',
@@ -422,16 +429,7 @@ export const SINGLE_POOLS: Record<string, any> = {
       'https://app-v1.aave.com/deposit/LINK-0x514910771af9ca656af840dff83e8264ecf986ca0x24a42fd28c976a61df5d00d0599c34c4f90748c8',
     abi: 'mphPool',
     type: 'mph88'
-  },
-  SECRETLINK: {
-    rewardsAddress: 'secret19y50xzywrz98g6ljxp43fd4q47sl40gkcpm03n',
-    tokens: [secretLINK, LINK],
-    stakedToken: stakedSecretLINK,
-    rewardsToken: secretSCRT,
-    balance: 0,
-    abi: 'scrtPool',
-    type: 'scrt'
-  },
+  }
 }
 
 export const NetworkContextName = 'NETWORK'
