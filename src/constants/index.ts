@@ -397,6 +397,13 @@ export const MFGWETH_POOL = new Token(
   'UNI-V2',
   'Uniswap Liquidity Token'
 )
+export const VRNWETH_POOL = new Token(
+  ChainId.MAINNET,
+  '0x88024deacdc2e9eda02a3051377ed635381faa54',
+  18,
+  'SLP',
+  'SushiSwap LP Token'
+)
 
 export const UNI_POOLS = {
   MFGWETH: {
@@ -407,6 +414,18 @@ export const UNI_POOLS = {
     liquidityUrl: 'https://app.uniswap.org/#/add/ETH/0x6710c63432A2De02954fc0f851db07146a6c0312',
     abi: 'StakingRewards',
     type: 'uni'
+  }
+}
+
+export const SUSHI_POOLS = {
+  VRNWETH: {
+    liquidityToken: VRNWETH_POOL,
+    rewardsAddress: '0x0D9263a012082eDA6B4A50Bb50eBaEE36026397d',
+    tokens: [VRN, WETHER],
+    balance: 0,
+    liquidityUrl: 'https://app.sushi.com/add/ETH/0x72377f31e30a405282b522d588AEbbea202b4f23',
+    abi: 'StakingRewards',
+    type: 'sushi'
   }
 }
 

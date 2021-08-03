@@ -215,6 +215,33 @@ export default async function positionInformation(
       console.log('getTokenPriceFromCoingecko', e)
     }
   }
+  if (unwrappedLiquidityToken.symbol === 'SLP') {
+    try {
+      const getSushiswapPoolLiquidityMethod: (...args: any) => Promise<any> = lpContract.getReserves
+      getSushiswapPoolLiquidityMethod().then(response => {
+        positionOutput.poolReserves = [
+          hexStringToNumber(response[0]?.toString(), currency0.decimals),
+          hexStringToNumber(response[1]?.toString(), currency1.decimals)
+        ]
+      })
+    } catch (e) {
+      console.log('getSushiswapPoolLiquidityMethod', e)
+    }
+
+    try {
+      const tokenAddress0 = position.tokens[0].address.toLowerCase()
+      const tokenAddress1 = position.tokens[1].address.toLowerCase()
+      const tokenPrice0 = tokenPrices[tokenAddress0]
+        ? Number(tokenPrices[tokenAddress0].price)
+        : await getTokenPriceFromCoingecko(tokenAddress0)
+      const tokenPrice1 = tokenPrices[tokenAddress1]
+        ? Number(tokenPrices[tokenAddress1].price)
+        : await getTokenPriceFromCoingecko(tokenAddress1)
+      positionOutput.poolTokenPrices = [tokenPrice0, tokenPrice1]
+    } catch (e) {
+      console.log('getTokenPriceFromCoingecko', e)
+    }
+  }
 
   if (account) {
     try {

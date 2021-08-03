@@ -220,7 +220,7 @@ export default function SingleStakingCard({
     }
   } else {
     if (isGov && priceObject) {
-      information.poolTokenPrices[0] = tokenPrices[VRN.address.toLowerCase()].price
+      information.poolTokenPrices[0] = tokenPrices[VRN.address.toLowerCase()]?.price || 0
     } else {
       if (tokenPrices && information.stakePoolTotalDeposited === 0) {
         const token0id = values.tokens[0].address.toLowerCase()

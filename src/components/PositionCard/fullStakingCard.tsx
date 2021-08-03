@@ -26,7 +26,7 @@ import Countdown from '../Countdown'
 import { ExternalButton, FixedHeightRow } from './index'
 import styled, { ThemeContext } from 'styled-components'
 import Card, { LightCard } from '../Card'
-import { UniswapSVG, VRNSVG, MPHSVG } from '../SVG'
+import { UniswapSVG, VRNSVG, MPHSVG, SushiSwapSVG } from '../SVG'
 import { TYPE } from '../../theme'
 import { getNetworkLibrary } from '../../connectors'
 import { useTokenBalance } from '../../state/wallet/hooks'
@@ -319,7 +319,7 @@ export default function FullStakingCard({
       }
     }
 
-    if (information.poolType === 'uni') {
+    if (information.poolType === 'uni' || information.poolType === 'sushi') {
       information.stakePoolTotalLiq =
         information.poolReserves[0] * information.poolTokenPrices[0] +
         information.poolReserves[1] * information.poolTokenPrices[1]
@@ -434,6 +434,10 @@ export default function FullStakingCard({
           <PlatformIcon>
             <MPHSVG />
           </PlatformIcon>
+        ) : information.poolType === 'sushi' ? (
+          <PlatformIcon>
+            <SushiSwapSVG />
+          </PlatformIcon>
         ) : (
           <PlatformIcon>
             <VRNSVG />
@@ -538,6 +542,14 @@ export default function FullStakingCard({
                       >
                         {t('stake')}
                       </ButtonSecondary>
+                    ) : information.poolType === 'sushi' ? (
+                      <ButtonSecondary
+                        as={Link}
+                        width="100%"
+                        to={`/stake/SUSHI/${values.tokens[0].symbol}${values.tokens[1].symbol}`}
+                      >
+                        {t('stake')}
+                      </ButtonSecondary>
                     ) : (
                       <ButtonSecondary
                         as={Link}
@@ -627,6 +639,14 @@ export default function FullStakingCard({
                       >
                         {t('unstake')}
                       </ButtonSecondary>
+                    ) : information.poolType === 'sushi' ? (
+                      <ButtonSecondary
+                        as={Link}
+                        width="48%"
+                        to={`/unstake/SUSHI/${values.tokens[0].symbol}${values.tokens[1].symbol}`}
+                      >
+                        {t('unstake')}
+                      </ButtonSecondary>
                     ) : (
                       <ButtonSecondary
                         as={Link}
@@ -659,7 +679,7 @@ export default function FullStakingCard({
                     <ButtonLight onClick={toggleWalletModal}>{t('connectWallet')}</ButtonLight>
                   ) : (
                     <>
-                      {information.poolType === 'uni' ? (
+                      {information.poolType === 'uni' || information.poolType === 'sushi' ? (
                         <ExternalButton href={values.liquidityUrl}>{t('addLiquidity')}</ExternalButton>
                       ) : (
                         <ButtonSecondary

@@ -16,7 +16,7 @@ import AppBody from '../AppBody'
 import { Dots } from '../../components/swap/styleds'
 import { useTranslation } from 'react-i18next'
 import { StakePools } from '../../components/Stake'
-import { ACTIVE_REWARD_POOLS, SINGLE_POOLS, UNI_POOLS } from '../../constants'
+import { ACTIVE_REWARD_POOLS, SINGLE_POOLS, SUSHI_POOLS, UNI_POOLS } from '../../constants'
 import Toggle from '../../components/Toggle'
 import { useNavigationActiveItemManager } from '../../state/navigation/hooks'
 import { RouteComponentProps } from 'react-router-dom'
@@ -31,6 +31,7 @@ export default function StakeOverview({
   const [fetchAll, setFetchAll] = useState(false)
   const [allRewardPools, setAllRewardPools] = useState<any | null>([])
   const [uniPoolsAdded, setUniPoolsAdded] = useState(false)
+  const [sushiPoolsAdded, setSushiPoolsAdded] = useState(false)
   const [singlePoolsAdded, setSinglePoolsAdded] = useState(false)
   const [showOwn, setShowOwn] = useState(false)
   const [showExpired, setShowExpired] = useState(false)
@@ -99,10 +100,18 @@ export default function StakeOverview({
         setAllRewardPools(allStakePools)
         setUniPoolsAdded(true)
       }
+      if (!sushiPoolsAdded) {
+        allStakePools.push(SUSHI_POOLS.VRNWETH)
+        setAllRewardPools(allStakePools)
+        setSushiPoolsAdded(true)
+      }
     }
   }
 
-  if ((allRewardPools.length && uniPoolsAdded && singlePoolsAdded && fetchAll && !allPoolsAdded) || !account) {
+  if (
+    (allRewardPools.length && uniPoolsAdded && sushiPoolsAdded && singlePoolsAdded && fetchAll && !allPoolsAdded) ||
+    !account
+  ) {
     setTimeout(function() {
       setAllPoolsAdded(true)
     }, 500)

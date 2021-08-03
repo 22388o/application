@@ -11,7 +11,7 @@ import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import { SwapPoolTabs } from '../../components/NavigationTabs'
 import { RowBetween } from '../../components/Row'
 import { useTranslation } from 'react-i18next'
-import { ACTIVE_REWARD_POOLS, SINGLE_POOLS, UNI_POOLS, VRN, yVRN } from '../../constants'
+import { ACTIVE_REWARD_POOLS, SINGLE_POOLS, SUSHI_POOLS, UNI_POOLS, VRN, yVRN } from '../../constants'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency, useToken } from '../../hooks/Tokens'
 import { useWalletModalToggle } from '../../state/application/hooks'
@@ -70,6 +70,7 @@ export default function Unstake({
   let tokenA = useToken(currencyIdA)
   let tokenB = useToken(currencyIdB)
   const isUni = currencyIdA === 'UNI'
+  const isSushi = currencyIdA === 'SUSHI'
   const isSingle = currencyIdA === 'single'
   const isGov = currencyIdB === 'gov'
 
@@ -90,6 +91,22 @@ export default function Unstake({
       liquidityTokenAddress = liquidityToken.address
       if (!found) {
         Object.entries(UNI_POOLS).forEach((entry: any) => {
+          if (entry[0] === currencyIdB) {
+            setFound(true)
+            liquidityToken = entry[1].liquidityToken
+            liquidityTokenAddress = liquidityToken.address
+            setPool(entry[1])
+            setCurrencyAsymbol(entry[1].tokens[0].symbol)
+            setCurrencyBsymbol(entry[1].tokens[1].symbol)
+            return
+          }
+        })
+      }
+    } else if (isSushi) {
+      liquidityToken = SUSHI_POOLS.VRNWETH.liquidityToken
+      liquidityTokenAddress = liquidityToken.address
+      if (!found) {
+        Object.entries(SUSHI_POOLS).forEach((entry: any) => {
           if (entry[0] === currencyIdB) {
             setFound(true)
             liquidityToken = entry[1].liquidityToken
@@ -274,7 +291,7 @@ export default function Unstake({
   }
 
   pool.balance = selectedCurrencyBalance ? Number(selectedCurrencyBalance?.toSignificant(6)) : 0
-  if (!isUni && !isSingle) {
+  if (!isUni && !isSingle && !isSushi) {
     const passedCurrencyA = currencyIdA === 'ETH' ? (chainId ? WETH[chainId] : WETH['1']) : currencyA
     const passedCurrencyB = currencyIdB === 'ETH' ? (chainId ? WETH[chainId] : WETH['1']) : currencyB
 
