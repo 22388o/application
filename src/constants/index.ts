@@ -437,17 +437,6 @@ export const SINGLE_POOLS: Record<string, any> = {
     balance: 0,
     abi: 'governancePool',
     type: 'gov'
-  },
-  ALINKV1: {
-    rewardsAddress: '0x904f81eff3c35877865810cca9a63f2d9cb7d4dd',
-    poolAddress: '0x904f81eff3c35877865810cca9a63f2d9cb7d4dd',
-    tokens: [aLINK, WETHER],
-    stakedToken: mphYALINKNFT,
-    balance: 0,
-    liquidityUrl:
-      'https://app-v1.aave.com/deposit/LINK-0x514910771af9ca656af840dff83e8264ecf986ca0x24a42fd28c976a61df5d00d0599c34c4f90748c8',
-    abi: 'mphPool',
-    type: 'mph88'
   }
 }
 

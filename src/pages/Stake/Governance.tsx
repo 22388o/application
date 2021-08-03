@@ -430,7 +430,7 @@ export default function StakeGovernance() {
                       <Loader />
                     ) : feeCountdown > now ? (
                       <BalanceText>
-                        1% <br />
+                        0.5% <br />
                         <Countdown
                           ends={feeCountdown}
                           format="DD[d] HH[h] mm[m] ss[s]"
