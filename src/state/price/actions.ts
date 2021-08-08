@@ -8,4 +8,5 @@ export const updatePriceBase = createAction<{
 }>('price/updatePriceBase')
 export const updateWyreObject = createAction<{ priceResponse: any }>('price/updateWyreObject')
 export const updateTokenPrices = createAction<{ tokenPrices: any }>('price/updateTokenPrices')
+export const updateVrnPrice = createAction<{ vrnPrice: number }>('price/updateVrnPrice')
 export const updateLPTokenPrices = createAction<{ lpTokenPrices: any }>('price/updateLPTokenPrices')

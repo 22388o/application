@@ -22,7 +22,7 @@ import { ETH_API_KEYS, getNetworkLibrary, NETWORK_URL } from '../../connectors'
 import hexStringToNumber from '../../utils/hexStringToNumber'
 import { BigNumber } from 'ethers'
 import { useBlockNumber, useWalletModalToggle } from '../../state/application/hooks'
-import { useGetTokenPrices } from '../../state/price/hooks'
+import { useGetTokenPrices, useGetVrnPrice } from '../../state/price/hooks'
 import moment from 'moment'
 import Countdown from '../../components/Countdown'
 import Web3 from 'web3'
@@ -176,8 +176,8 @@ export default function StakeGovernance() {
   const [feeCountdown, setFeeCountdown] = useState(0)
   const govContract = getContract(governanceAddress, governancePool, fakeLibrary, fakeAccount)
   const { tokenPrices } = useGetTokenPrices()
-  const vrnPriceUsd = tokenPrices ? tokenPrices[VRN.address.toLowerCase()].price : 0
-  const yvrnPriceUsd = tokenPrices && yvrnPrice !== 0 ? vrnPriceUsd * yvrnPrice : vrnPriceUsd
+  const { vrnPrice } = useGetVrnPrice()
+  const yvrnPriceUsd = tokenPrices && yvrnPrice !== 0 ? vrnPrice * yvrnPrice : vrnPrice
   const now = moment().unix()
   const lastBlockNumber = useBlockNumber()
   const numberOfDaysForApy = 60
@@ -197,19 +197,19 @@ export default function StakeGovernance() {
   if (!govBalanceFetching) {
     setGovBalanceFetching(true)
 
-    if (account) {
-      if (yvrnPrice === 0) {
-        const getPricePerFullShareMethod: (...args: any) => Promise<BigNumber> = govContract.getPricePerFullShare
-        getPricePerFullShareMethod()
-          .then(response => {
-            setYVrnPrice(hexStringToNumber(response.toHexString(), yVRN.decimals))
-          })
-          .catch(e => {
-            setYVrnPrice(1)
-            console.log(e)
-          })
-      }
+    if (yvrnPrice === 0) {
+      const getPricePerFullShareMethod: (...args: any) => Promise<BigNumber> = govContract.getPricePerFullShare
+      getPricePerFullShareMethod()
+        .then(response => {
+          setYVrnPrice(hexStringToNumber(response.toHexString(), yVRN.decimals))
+        })
+        .catch(e => {
+          setYVrnPrice(1)
+          console.log(e)
+        })
+    }
 
+    if (account) {
       const earlyWithdrawalFeeExpiryMethod: (...args: any) => Promise<BigNumber> = govContract.earlyWithdrawalFeeExpiry
       const args: Array<string> = [account]
       earlyWithdrawalFeeExpiryMethod(...args).then(response => {
@@ -314,7 +314,7 @@ export default function StakeGovernance() {
                 <BalanceText>
                   {displayNumber(totalStaked) + ' ' + VRN.symbol}
                   <br />
-                  {numberToUsd(Number(govBalances[VRN.address]?.toSignificant(8)) * vrnPriceUsd)}
+                  {numberToUsd(Number(govBalances[VRN.address]?.toSignificant(8)) * vrnPrice)}
                   <br />
                   {t('stakeOfTotalSupply', { percent: numberToPercent(percentageStakedTVL) })}
                 </BalanceText>
@@ -333,7 +333,7 @@ export default function StakeGovernance() {
                 <Text> {t('stakeGovernanceTotalDistributed')}</Text>
                 <BalanceText>
                   {`${numberToSignificant(totalReceivedVRN, 5)} ${VRN.symbol}`}
-                  <br />({numberToUsd(totalReceivedVRN * vrnPriceUsd)})
+                  <br />({numberToUsd(totalReceivedVRN * vrnPrice)})
                 </BalanceText>
               </RowBetween>
             )}
@@ -368,7 +368,7 @@ export default function StakeGovernance() {
                   ) : (
                     <BalanceText>
                       {userBalances[VRN.address]?.toSignificant(4) + ' ' + VRN.symbol}
-                      <br />({numberToUsd(Number(userBalances[VRN.address]?.toSignificant(8)) * vrnPriceUsd)})
+                      <br />({numberToUsd(Number(userBalances[VRN.address]?.toSignificant(8)) * vrnPrice)})
                     </BalanceText>
                   )}
                 </RowBetween>

@@ -1,5 +1,5 @@
 import { useActiveWeb3React } from '../../hooks'
-import { useGetPriceBase, useGetTokenPrices } from '../../state/price/hooks'
+import { useGetPriceBase, useGetTokenPrices, useGetVrnPrice } from '../../state/price/hooks'
 import React, { useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
@@ -29,7 +29,7 @@ import { TransactionResponse } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import ReactGA from 'react-ga'
 import { useTransactionAdder } from '../../state/transactions/hooks'
-import { SINGLE_POOLS, VRN, yVRN } from '../../constants'
+import { SINGLE_POOLS, yVRN } from '../../constants'
 import Web3 from 'web3'
 
 const StakingCard = styled(Card)<{ highlight?: boolean; show?: boolean }>`
@@ -125,6 +125,7 @@ export default function SingleStakingCard({
   const currencyA = currency0
   const balance = useTokenBalance(account ?? undefined, values.tokens[0])
   const nftBalance = useTokenBalance(account ?? undefined, values.stakedToken)
+  const { vrnPrice } = useGetVrnPrice()
   const [information, setInformation] = useState<any>({
     poolReserves: [0, 0],
     poolTokenPrices: [0, 0],
@@ -220,7 +221,7 @@ export default function SingleStakingCard({
     }
   } else {
     if (isGov && priceObject) {
-      information.poolTokenPrices[0] = tokenPrices[VRN.address.toLowerCase()]?.price || 0
+      information.poolTokenPrices[0] = vrnPrice
     } else {
       if (tokenPrices && information.stakePoolTotalDeposited === 0) {
         const token0id = values.tokens[0].address.toLowerCase()

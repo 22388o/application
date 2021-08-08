@@ -1,5 +1,5 @@
 import { useActiveWeb3React } from '../../hooks'
-import { useGetLPTokenPrices, useGetTokenPrices } from '../../state/price/hooks'
+import { useGetLPTokenPrices, useGetTokenPrices, useGetVrnPrice } from '../../state/price/hooks'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
@@ -30,6 +30,7 @@ import { UniswapSVG, VRNSVG, MPHSVG, SushiSwapSVG } from '../SVG'
 import { TYPE } from '../../theme'
 import { getNetworkLibrary } from '../../connectors'
 import { useTokenBalance } from '../../state/wallet/hooks'
+import { VRN } from '../../constants'
 
 const StakingCard = styled(Card)<{ highlight?: boolean; show?: boolean }>`
   font-size: 14px;
@@ -75,6 +76,7 @@ export default function FullStakingCard({
   const { account, chainId, library } = useActiveWeb3React()
   const { tokenPrices } = useGetTokenPrices()
   const { lpTokenPrices } = useGetLPTokenPrices()
+  const { vrnPrice } = useGetVrnPrice()
   const [showMore, setShowMore] = useState(show)
   const { t } = useTranslation()
   const currency0 = unwrappedToken(values.tokens[0])
@@ -263,6 +265,9 @@ export default function FullStakingCard({
         information.rewardInfo[0].price = tokenPrices[token0Address].price
       } else {
         if (token0Address !== fakeAccount) {
+          if (token0Address === VRN.address.toLowerCase()) {
+            information.poolTokenPrices[0] = vrnPrice
+          }
           if (values.tokens[0].address.toLowerCase() === token0Address && information.poolTokenPrices[0] !== 0) {
             information.rewardInfo[0].address = values.tokens[0].address
             information.rewardInfo[0].decimals = values.tokens[0].decimals

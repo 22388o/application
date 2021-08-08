@@ -19,6 +19,7 @@ import { useTokenUsdPrices } from '../../hooks/useTokenUsdPrice'
 import { useLPTokenUsdPrices } from '../../hooks/useLPTokenUsdPrice'
 import { useMphPools } from '../../hooks/useMphPools'
 import { useSecretPools } from '../../hooks/useSecretPools'
+import { useVrnUsdPrice } from '../../hooks/useVrnUsdPrice'
 
 const HeaderFrame = styled.div`
   display: flex;
@@ -150,6 +151,7 @@ export default function Header() {
   useGasPrices()
   useCurrencyUsdPrice()
   useTokenUsdPrices()
+  useVrnUsdPrice()
   useLPTokenUsdPrices()
   useSecretPools()
   useMphPools()

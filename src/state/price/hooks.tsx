@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, AppState } from '../index'
-import { updatePriceBase, updateTokenPrices, updateLPTokenPrices, updateWyreObject } from './actions'
+import { updatePriceBase, updateTokenPrices, updateVrnPrice, updateLPTokenPrices, updateWyreObject } from './actions'
 
 export function usePriceBaseManager(): (
   ethPriceBase: number,
@@ -48,6 +48,24 @@ export function useTokenPricesManager(): (tokenPrices: any) => void {
 export function useGetTokenPrices(): any {
   return {
     tokenPrices: useSelector<AppState, AppState['price']['tokenPrices']>(state => state.price.tokenPrices),
+    timestamp: useSelector<AppState, AppState['price']['timestamp']>(state => state.price.timestamp)
+  }
+}
+
+export function useVrnPriceManager(): (vrnPrice: number) => void {
+  const dispatch = useDispatch<AppDispatch>()
+  return useCallback(
+    (vrnPrice: number) => {
+      console.log(vrnPrice)
+      dispatch(updateVrnPrice({ vrnPrice: vrnPrice }))
+    },
+    [dispatch]
+  )
+}
+
+export function useGetVrnPrice(): any {
+  return {
+    vrnPrice: useSelector<AppState, AppState['price']['vrnPrice']>(state => state.price.vrnPrice),
     timestamp: useSelector<AppState, AppState['price']['timestamp']>(state => state.price.timestamp)
   }
 }
