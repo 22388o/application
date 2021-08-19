@@ -133,7 +133,7 @@ async function getBlockCountDown(targetBlock: number) {
 async function getIncomingTransactions(senderAddress: string) {
   const ethAPIKey = ETH_API_KEYS[Math.floor(Math.random() * ETH_API_KEYS.length)]
   try {
-    const url = `https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x80Ad276cce240A8C4ad05c589557482fFD729755&address=${senderAddress}&startblock=0&endblock=999999999&sort=desc&apikey=${ethAPIKey}`
+    const url = `https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x72377f31e30a405282b522d588aebbea202b4f23&address=${senderAddress}&startblock=0&endblock=999999999&sort=desc&apikey=${ethAPIKey}`
     const response = await fetch(url, {
       headers: {
         Accept: 'application/json',
@@ -222,7 +222,7 @@ export default function StakeGovernance() {
     }
 
     if (receivedVRNManual === 0) {
-      getIncomingTransactions('0x0389d755c1833c9b350d4e8b619eae16defc1cba').then(transactions => {
+      getIncomingTransactions('0x0389d755C1833C9b350d4E8B619Eae16deFc1CbA').then(transactions => {
         let VRNManual = 0
         transactions.forEach(function(transaction: Record<string, any>) {
           if (transaction.to === governanceAddress.toLowerCase()) {
