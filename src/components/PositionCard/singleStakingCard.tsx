@@ -633,6 +633,13 @@ export default function SingleStakingCard({
                           </ExternalButton>
                         )}
                       </>
+                    ) : information.poolType === 'gov' ? (
+                      <ExternalButton
+                        href={`https://app.sushi.com/swap?outputCurrency=${values.stakedToken.address}`}
+                        target="_blank"
+                      >
+                        {t('getToken', { currencySymbol: currency0.symbol })}
+                      </ExternalButton>
                     ) : (
                       <>
                         {information.userBalance === 0 && (

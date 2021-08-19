@@ -26,6 +26,7 @@ import { useGetTokenPrices, useGetVrnPrice } from '../../state/price/hooks'
 import moment from 'moment'
 import Countdown from '../../components/Countdown'
 import Web3 from 'web3'
+import { ExternalButton } from '../../components/PositionCard'
 
 const GovernanceBalance = styled.div`
   display: flex;
@@ -378,9 +379,9 @@ export default function StakeGovernance() {
                       {t('stake')}
                     </ButtonSecondary>
                   ) : (
-                    <ButtonSecondary as={Link} width="100%" to={`/swap?outputCurrency=${VRN.address}`}>
+                    <ExternalButton href={`https://app.sushi.com/swap?outputCurrency=${VRN.address}`} target="_blank">
                       {t('buyCurrency', { currency: VRN.symbol })}
-                    </ButtonSecondary>
+                    </ExternalButton>
                   )}
                 </RowBetween>
               </>
