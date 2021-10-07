@@ -102,6 +102,7 @@ export default function StakeOverview({
       }
       if (!sushiPoolsAdded) {
         allStakePools.push(SUSHI_POOLS.VRNWETH)
+        allStakePools.push(SUSHI_POOLS.VRNWETHOLD)
         setAllRewardPools(allStakePools)
         setSushiPoolsAdded(true)
       }
