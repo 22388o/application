@@ -56,7 +56,6 @@ export function useVrnPriceManager(): (vrnPrice: number) => void {
   const dispatch = useDispatch<AppDispatch>()
   return useCallback(
     (vrnPrice: number) => {
-      console.log(vrnPrice)
       dispatch(updateVrnPrice({ vrnPrice: vrnPrice }))
     },
     [dispatch]
