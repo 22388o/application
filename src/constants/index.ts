@@ -406,14 +406,6 @@ export const VRNWETH_POOL = new Token(
   'SushiSwap LP Token'
 )
 
-export const VRNWETHOLD_POOL = new Token(
-  ChainId.MAINNET,
-  '0x88024deacdc2e9eda02a3051377ed635381faa54',
-  18,
-  'SLP',
-  'SushiSwap LP Token'
-)
-
 export const UNI_POOLS = {
   MFGWETH: {
     liquidityToken: MFGWETH_POOL,
@@ -430,15 +422,6 @@ export const SUSHI_POOLS = {
   VRNWETH: {
     liquidityToken: VRNWETH_POOL,
     rewardsAddress: '0x25a25E2f0D2C211A96Fa35e8c670eF6F5b3aBA57',
-    tokens: [VRN, WETHER],
-    balance: 0,
-    liquidityUrl: 'https://app.sushi.com/add/ETH/0x72377f31e30a405282b522d588AEbbea202b4f23',
-    abi: 'StakingRewards',
-    type: 'sushi'
-  },
-  VRNWETHOLD: {
-    liquidityToken: VRNWETHOLD_POOL,
-    rewardsAddress: '0x0D9263a012082eDA6B4A50Bb50eBaEE36026397d',
     tokens: [VRN, WETHER],
     balance: 0,
     liquidityUrl: 'https://app.sushi.com/add/ETH/0x72377f31e30a405282b522d588AEbbea202b4f23',
