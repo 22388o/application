@@ -162,7 +162,7 @@ export const renDGB = new Token(
 
 export const renLUNA = new Token(
   ChainId.MAINNET,
-  '0x52d87F22192131636F93c5AB18d0127Ea52CB641',
+  '0x52d87f22192131636f93c5ab18d0127ea52cb641',
   6,
   'renLUNA',
   'RenVM Terra'
