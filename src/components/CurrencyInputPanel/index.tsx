@@ -29,7 +29,7 @@ const CurrencySelect = styled.button<{
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 500; 
   background: ${({ selected, primary, theme }) => {
     if (selected) {
       return theme.appCurrencyInputBGActive
@@ -48,7 +48,7 @@ const CurrencySelect = styled.button<{
       ? '0px'
       : theme.borderRadius};
   outline: none;
-  cursor: pointer;
+  pointer-events: none
   user-select: none;
   border: none;
   padding: 12px;

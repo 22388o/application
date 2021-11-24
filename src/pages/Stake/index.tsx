@@ -142,9 +142,6 @@ export default function StakeOverview({
   const { t } = useTranslation()
   return (
     <>
-      <NavigationCard>
-        <SwapPoolTabs active={'stake'} />
-      </NavigationCard>
       <AppBody>
         <AutoColumn gap="lg" justify="center">
           <AutoColumn gap="12px" style={{ width: '100%' }}>

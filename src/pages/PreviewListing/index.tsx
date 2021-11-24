@@ -1,11 +1,7 @@
 import React, { useContext } from 'react'
-import { SwapPoolTabs } from '../../components/NavigationTabs'
-import Card from '../../components/Card'
 import { ThemeContext } from 'styled-components'
 import AppBody from '../AppBody'
-import { AutoColumn } from '../../components/Column'
 import { Text } from 'rebass'
-import { PreviewListingTabs } from '../../components/NavigationTabs'
 import { ButtonPrimary } from '../../components/Button'
 import { useTranslation } from 'react-i18next'
 
@@ -30,13 +26,7 @@ export default function PreviewListing() {
 
   return (
     <>
-      <Card style={{ maxWidth: '420px', padding: '12px', backgroundColor: theme.appBGColor, marginBottom: '32px' }}>
-        <SwapPoolTabs active={'swap'} />
-      </Card>
       <AppBody>
-        <AutoColumn>
-          <PreviewListingTabs />
-        </AutoColumn>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '24px', marginTop: '24px' }}>
           <Text style={{ color: 'white' }}>Rate</Text>
           <div style={{ textAlign: 'end' }}>

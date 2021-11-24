@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Globe, PlusSquare, MinusSquare, Menu, X } from 'react-feather'
 import { Settings } from 'react-feather'
-import { SwapSVG, PoolSVG, StakeSVG, BuySVG, VRNSVG, WalletSVG, ThemeSVG, BridgeSVG } from '../SVG'
+import { SwapSVG, PoolSVG, StakeSVG, BuySVG, VRNSVG, WalletSVG, ThemeSVG } from '../SVG'
 import { NavLink } from 'react-router-dom'
 import { useNavigationActiveItem } from '../../state/navigation/hooks'
 import { RowBetween } from '../Row'
@@ -410,16 +410,6 @@ export default function Navigation() {
   }
 
   switch (currentActive) {
-    case 'liquidity':
-      if (!showLiquidity) {
-        setShowSwap(false)
-        setShowLiquidity(true)
-        setShowStaking(false)
-        setShowWyre(false)
-        setShowBridges(false)
-        setShowVaren(false)
-      }
-      break
     case 'stake':
       if (!showStaking) {
         setShowSwap(false)
@@ -427,26 +417,6 @@ export default function Navigation() {
         setShowStaking(true)
         setShowWyre(false)
         setShowBridges(false)
-        setShowVaren(false)
-      }
-      break
-    case 'buy':
-      if (!showWyre) {
-        setShowSwap(false)
-        setShowLiquidity(false)
-        setShowStaking(false)
-        setShowWyre(true)
-        setShowBridges(false)
-        setShowVaren(false)
-      }
-      break
-    case 'bridges':
-      if (!showBridges) {
-        setShowSwap(false)
-        setShowLiquidity(false)
-        setShowStaking(false)
-        setShowWyre(false)
-        setShowBridges(true)
         setShowVaren(false)
       }
       break
@@ -561,103 +531,22 @@ export default function Navigation() {
             </SubNavigationBody>
           </NavigationElement>
           <NavigationElement>
-            <NavTitle>
-              <NavTitleLink
-                onClick={() => {
-                  setShowSettings(!showSettings)
-                }}
-              >
-                {expertMode ? (
-                  <NavigationIconWrapper>
-                    <SettingsIconTop />
-                    <SettingsIconBottom />
-                  </NavigationIconWrapper>
-                ) : (
-                  <NavigationIconWrapper>
-                    <SettingsIcon />
-                  </NavigationIconWrapper>
-                )}
-                {t('settings')}
-              </NavTitleLink>
-              <CollapseToggle
-                onClick={() => {
-                  setShowSettings(!showSettings)
-                }}
-              >
-                {showSettings ? <CollapseIcon /> : <ExpandIcon />}
-              </CollapseToggle>
-            </NavTitle>
-            <SubNavigationBody show={showSettings}>
-              <SettingsTab />
-            </SubNavigationBody>
-          </NavigationElement>
-          <NavigationElement>
             <NavTitle active={currentActive === 'swap'}>
               <NavTitleLink
                 onClick={() => {
-                  goTo('/swap')
+                  goTo('/migrate')
                   if (!showSwap) {
                     setShowSwap(true)
-                    setShowLiquidity(false)
                     setShowStaking(false)
-                    setShowWyre(false)
-                    setShowBridges(false)
                   }
                 }}
               >
                 <NavigationIconWrapper>
                   <SwapSVG />
                 </NavigationIconWrapper>
-                {t('swap')}
+                {t('migration')}
               </NavTitleLink>
             </NavTitle>
-          </NavigationElement>
-          <NavigationElement>
-            <NavTitle active={currentActive === 'liquidity'}>
-              <NavTitleLink
-                onClick={() => {
-                  goTo('/pool')
-                  if (!showLiquidity) {
-                    setShowSwap(false)
-                    setShowLiquidity(true)
-                    setShowStaking(false)
-                    setShowWyre(false)
-                    setShowBridges(false)
-                  }
-                }}
-              >
-                <NavigationIconWrapper>
-                  <PoolSVG />
-                </NavigationIconWrapper>
-                {t('liquidity')}
-              </NavTitleLink>
-              {currentActive !== 'liquidity' && (
-                <CollapseToggle
-                  onClick={() => {
-                    setShowLiquidity(!showLiquidity)
-                  }}
-                >
-                  {showLiquidity ? <CollapseIcon /> : <ExpandIcon />}
-                </CollapseToggle>
-              )}
-            </NavTitle>
-            <SubNavigationBodyList show={showLiquidity}>
-              <SubNavigationElement>
-                <StyledNavLink id={'pool'} to={'/pool'} isActive={() => active === 'liquidity-pool'}>
-                  <NavLabel>{t('myPositions')}</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink id={'add'} to={'/add/ETH'} isActive={() => active === 'liquidity-add'}>
-                  <NavLabel>{t('addLiquidity')}</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink id={'import-pool'} to={'/find'} isActive={() => active === 'liquidity-import'}>
-                  <NavLabel>{t('importPool')}</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-            </SubNavigationBodyList>
           </NavigationElement>
           <NavigationElement>
             <NavTitle active={currentActive === 'stake'}>
@@ -665,11 +554,7 @@ export default function Navigation() {
                 onClick={() => {
                   goTo('/stake')
                   if (!showStaking) {
-                    setShowSwap(false)
-                    setShowLiquidity(false)
                     setShowStaking(true)
-                    setShowWyre(false)
-                    setShowBridges(false)
                   }
                 }}
               >
@@ -711,185 +596,6 @@ export default function Navigation() {
                   isActive={() => active === 'stake-inactive'}
                 >
                   <NavLabel>{t('inactivePools')}</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-            </SubNavigationBodyList>
-          </NavigationElement>
-          <NavigationElement>
-            <NavTitle active={currentActive === 'bridges'}>
-              <NavTitleLink
-                onClick={() => {
-                  goTo('/bridges')
-                  if (!showBridges) {
-                    setShowSwap(false)
-                    setShowLiquidity(false)
-                    setShowStaking(false)
-                    setShowWyre(false)
-                    setShowBridges(true)
-                  }
-                }}
-              >
-                <NavigationIconWrapper>
-                  <BridgeSVG />
-                </NavigationIconWrapper>
-                {t('bridges')}
-              </NavTitleLink>
-              {currentActive !== 'bridges' && (
-                <CollapseToggle
-                  onClick={() => {
-                    setShowBridges(!showBridges)
-                  }}
-                >
-                  {showBridges ? <CollapseIcon /> : <ExpandIcon />}
-                </CollapseToggle>
-              )}
-            </NavTitle>
-            <SubNavigationBodyList show={showBridges}>
-              <SubNavigationElement>
-                <StyledNavLink id={'bridges'} to={'/bridges'} isActive={() => active === 'bridges'}>
-                  <NavLabel>{t('overview')}</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink id={'bridges-ren'} to={'/ren'} isActive={() => active === 'bridges-ren'}>
-                  <NavLabel>{t('bridgesRen')}</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink id={'bridges-scrt'} to={'/scrt'} isActive={() => active === 'bridges-scrt'}>
-                  <NavLabel>{t('bridgesScrt')}</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink
-                  id={'bridges-renbch'}
-                  to={'/bridges/ren/bch'}
-                  isActive={() => active === 'bridges-renbch'}
-                >
-                  <NavLabel>renBCH</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink
-                  id={'bridges-renbtc'}
-                  to={'/bridges/ren/btc'}
-                  isActive={() => active === 'bridges-renbtc'}
-                >
-                  <NavLabel>renBTC</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink
-                  id={'bridges-rendgb'}
-                  to={'/bridges/ren/dgb'}
-                  isActive={() => active === 'bridges-rendgb'}
-                >
-                  <NavLabel>renDGB</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink
-                  id={'bridges-rendoge'}
-                  to={'/bridges/ren/doge'}
-                  isActive={() => active === 'bridges-rendoge'}
-                >
-                  <NavLabel>renDOGE</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink
-                  id={'bridges-renfil'}
-                  to={'/bridges/ren/fil'}
-                  isActive={() => active === 'bridges-renfil'}
-                >
-                  <NavLabel>renFIL</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink
-                  id={'bridges-renluna'}
-                  to={'/bridges/ren/luna'}
-                  isActive={() => active === 'bridges-renluna'}
-                >
-                  <NavLabel>renLUNA</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink
-                  id={'bridges-renzec'}
-                  to={'/bridges/ren/zec'}
-                  isActive={() => active === 'bridges-renzec'}
-                >
-                  <NavLabel>renZEC</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink
-                  id={'bridges-secreteth'}
-                  to={'/bridges/scrt/weth'}
-                  isActive={() => active === 'bridges-secreteth'}
-                >
-                  <NavLabel>secretETH</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink
-                  id={'bridges-secretlink'}
-                  to={'/bridges/scrt/link'}
-                  isActive={() => active === 'bridges-secretlink'}
-                >
-                  <NavLabel>secretLINK</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink
-                  id={'bridges-secretyfl'}
-                  to={'/bridges/scrt/yfl'}
-                  isActive={() => active === 'bridges-secretyfl'}
-                >
-                  <NavLabel>secretYFL</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-            </SubNavigationBodyList>
-          </NavigationElement>
-          <NavigationElement>
-            <NavTitle active={currentActive === 'buy'}>
-              <NavTitleLink
-                onClick={() => {
-                  goTo('/buy')
-                  if (!showWyre) {
-                    setShowSwap(false)
-                    setShowLiquidity(false)
-                    setShowStaking(false)
-                    setShowWyre(true)
-                    setShowBridges(false)
-                  }
-                }}
-              >
-                <NavigationIconWrapper>
-                  <BuySVG />
-                </NavigationIconWrapper>
-                Wyre
-              </NavTitleLink>
-              {currentActive !== 'buy' && (
-                <CollapseToggle
-                  onClick={() => {
-                    setShowWyre(!showWyre)
-                  }}
-                >
-                  {showWyre ? <CollapseIcon /> : <ExpandIcon />}
-                </CollapseToggle>
-              )}
-            </NavTitle>
-            <SubNavigationBodyList show={showWyre}>
-              <SubNavigationElement>
-                <StyledNavLink id={'buy'} to={'/buy'} isActive={() => active === 'buy'}>
-                  <NavLabel>{t('buyCurrency', { currency: 'Ethereum' })}</NavLabel>
-                </StyledNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <StyledNavLink id={'buy-link'} to={'/buy?currency=LINK'} isActive={() => active === 'buy-link'}>
-                  <NavLabel>{t('buyCurrency', { currency: LINK.name })}</NavLabel>
                 </StyledNavLink>
               </SubNavigationElement>
             </SubNavigationBodyList>
@@ -941,18 +647,8 @@ export default function Navigation() {
                 </ExternalNavLink>
               </SubNavigationElement>
               <SubNavigationElement>
-                <ExternalNavLink href="https://gitbook.varen.finance">
-                  <NavLabel>{t('projectDocumentation')}</NavLabel>
-                </ExternalNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
                 <ExternalNavLink href="https://snapshot.varen.finance">
                   <NavLabel>{t('stakeGovernanceVoting')}</NavLabel>
-                </ExternalNavLink>
-              </SubNavigationElement>
-              <SubNavigationElement>
-                <ExternalNavLink href="https://info.varen.exchange">
-                  <NavLabel>{t('charts')}</NavLabel>
                 </ExternalNavLink>
               </SubNavigationElement>
             </SubNavigationBodyList>

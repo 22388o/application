@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { Text } from 'rebass'
-import Card, { BlueCard } from '../../components/Card'
-import { SwapPoolTabs } from '../../components/NavigationTabs'
+import { BlueCard } from '../../components/Card'
 import AppBody from '../AppBody'
 import { ThemeContext } from 'styled-components'
 import { useTranslation } from 'react-i18next'
@@ -46,9 +45,6 @@ export default function Scrt() {
   })
   return (
     <>
-      <Card style={{ maxWidth: '420px', padding: '12px', backgroundColor: theme.navigationBG, marginBottom: '16px' }}>
-        <SwapPoolTabs active={'none'} />
-      </Card>
       <AppBody>
         <AutoColumn gap={'12px'}>
           <RowBetween>

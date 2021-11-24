@@ -234,9 +234,6 @@ export default function ScrtStake({
   } else {
     return (
       <>
-        <NavigationCard>
-          <SwapPoolTabs active={'stake'} />
-        </NavigationCard>
         <AppBody>
           <Tabs>
             <RowBetween style={{ padding: '1rem 0' }}>

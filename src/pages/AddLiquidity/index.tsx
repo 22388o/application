@@ -13,7 +13,6 @@ import { AutoColumn, ColumnCenter } from '../../components/Column'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import DoubleCurrencyLogo from '../../components/DoubleLogo'
-import { SwapPoolTabs, AddRemoveTabs } from '../../components/NavigationTabs'
 import { MinimalPositionCard } from '../../components/PositionCard'
 import Row, { RowBetween, RowFlat } from '../../components/Row'
 import { useTranslation } from 'react-i18next'
@@ -317,11 +316,7 @@ export default function AddLiquidity({
 
   return (
     <>
-      <Card style={{ maxWidth: '420px', padding: '12px', backgroundColor: theme.navigationBG, marginBottom: '16px' }}>
-        <SwapPoolTabs active={'pool'} />
-      </Card>
       <AppBody>
-        <AddRemoveTabs adding={true} />
         <Wrapper>
           <TransactionConfirmationModal
             isOpen={showConfirm}

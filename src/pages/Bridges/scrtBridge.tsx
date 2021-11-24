@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { Link, Text } from 'rebass'
-import { BlueCard, NavigationCard } from '../../components/Card'
-import { SwapPoolTabs } from '../../components/NavigationTabs'
+import { BlueCard } from '../../components/Card'
 import AppBody from '../AppBody'
 import styled, { ThemeContext } from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
@@ -392,9 +391,6 @@ export default function ScrtBridge({
 
   return (
     <>
-      <NavigationCard>
-        <SwapPoolTabs active={'none'} />
-      </NavigationCard>
       <AppBody>
         <AutoColumn gap={'12px'}>
           <BackButton>

@@ -10,12 +10,11 @@ import { RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
 import styled, { ThemeContext } from 'styled-components'
 import { ButtonGray, ButtonPrimary } from '../../components/Button'
-import { BlueCard, LightCard, NavigationCard, OutlineCard } from '../../components/Card'
+import { BlueCard, LightCard, OutlineCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal'
 import CurrencyInputPanel, { CurrencyDoubleInputPanel } from '../../components/CurrencyInputPanel'
 import DoubleCurrencyLogo from '../../components/DoubleLogo'
-import { SwapPoolTabs, CreateTabs } from '../../components/NavigationTabs'
 import Row, { RowFlat } from '../../components/Row'
 import ToggleSwitch from '../../components/ToggleSwitch'
 import CurrencyLogo from '../../components/CurrencyLogo'
@@ -367,11 +366,7 @@ export default function CreateNewPool({
 
   return (
     <>
-      <NavigationCard>
-        <SwapPoolTabs active={'create'} />
-      </NavigationCard>
       <AppBody>
-        <CreateTabs />
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <StepsContainer style={{ width: 320, display: 'flex', alignItems: 'flex-center', marginBottom: 16 }}>
             <Steps size="small" labelPlacement="vertical" current={step}>

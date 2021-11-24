@@ -2,7 +2,6 @@ import { CurrencyAmount, JSBI, Token, Trade } from '@uniswap/sdk'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown } from 'react-feather'
 import ReactGA from 'react-ga'
-import { Text } from 'rebass'
 import { ThemeContext } from 'styled-components'
 import AddressInputPanel from '../../components/AddressInputPanel'
 import { ButtonError, ButtonPrimary, ButtonConfirmed, ButtonSecondary } from '../../components/Button'
@@ -10,19 +9,12 @@ import Card, { GreyCard, NavigationCard } from '../../components/Card'
 import { AutoColumn } from '../../components/Column'
 import ConfirmSwapModal from '../../components/swap/ConfirmSwapModal'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
-import { SwapPoolTabs } from '../../components/NavigationTabs'
 import { AutoRow, RowBetween } from '../../components/Row'
 import AdvancedSwapDetailsDropdown from '../../components/swap/AdvancedSwapDetailsDropdown'
 import confirmPriceImpactWithoutFee from '../../components/swap/confirmPriceImpactWithoutFee'
 import {
-  ArrowWrapper,
   BottomGrouping,
-  SwapCallbackError,
   Wrapper,
-  CopyToClipboard,
-  CheckIcon,
-  CopyIcon,
-  CopiedToClipboard
 } from '../../components/swap/styleds'
 import TradePrice from '../../components/swap/TradePrice'
 import TokenWarningModal from '../../components/TokenWarningModal'
@@ -122,13 +114,10 @@ export default function Swap() {
     currencies,
     inputError: swapInputError
   } = useDerivedSwapInfo()
-  const isMigration =
-    wrappedCurrency(currencies[Field.INPUT], chainId)?.address.toLowerCase() === YFL.address.toLowerCase() &&
-    wrappedCurrency(currencies[Field.OUTPUT], chainId)?.address.toLowerCase() === VRN.address.toLowerCase()
-
-  const isCounterMigration =
-    wrappedCurrency(currencies[Field.OUTPUT], chainId)?.address.toLowerCase() === YFL.address.toLowerCase() &&
-    wrappedCurrency(currencies[Field.INPUT], chainId)?.address.toLowerCase() === VRN.address.toLowerCase()
+  currencies[Field.INPUT] = YFL;
+  currencies[Field.OUTPUT] = VRN;
+  const isMigration = true
+  const isCounterMigration = false
 
   const { wrapType, execute: onWrap, inputError: wrapInputError } = useWrapCallback(
     currencies[Field.INPUT],
@@ -137,23 +126,11 @@ export default function Swap() {
   )
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
   const { address: recipientAddress } = useENSAddress(recipient)
-  const toggledVersion = useToggledVersion()
-  const trade =
-    isCounterMigration || isMigration || showWrap
-      ? undefined
-      : {
-          [Version.v1]: v1Trade,
-          [Version.v2]: v2Trade
-        }[toggledVersion]
+  const trade = undefined
 
-  const parsedAmounts = showWrap
-    ? {
+  const parsedAmounts = {
         [Field.INPUT]: parsedAmount,
         [Field.OUTPUT]: parsedAmount
-      }
-    : {
-        [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
-        [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount
       }
 
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
@@ -195,11 +172,10 @@ export default function Swap() {
       : parsedAmounts[dependentField]?.toSignificant(6) ?? ''
   }
 
-  const route = trade?.route
   const userHasSpecifiedInputOutput = Boolean(
     currencies[Field.INPUT] && currencies[Field.OUTPUT] && parsedAmounts[independentField]?.greaterThan(JSBI.BigInt(0))
   )
-  const noRoute = !route
+  const noRoute = true
 
   const [approvalMigration, approveMigrationCallback] = useApproveCallback(
     parsedAmounts[independentField],
@@ -232,43 +208,6 @@ export default function Swap() {
 
   const { priceImpactWithoutFee } = computeTradePriceBreakdown(trade)
 
-  const handleSwap = useCallback(() => {
-    if (priceImpactWithoutFee && !confirmPriceImpactWithoutFee(priceImpactWithoutFee)) {
-      return
-    }
-    if (!swapCallback) {
-      return
-    }
-    setSwapState({ attemptingTxn: true, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: undefined })
-    swapCallback()
-      .then(hash => {
-        setSwapState({ attemptingTxn: false, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: hash })
-
-        ReactGA.event({
-          category: 'Swap',
-          action:
-            recipient === null
-              ? 'Swap w/o Send'
-              : (recipientAddress ?? recipient) === account
-              ? 'Swap w/o Send + recipient'
-              : 'Swap w/ Send',
-          label: [
-            trade?.inputAmount?.currency?.symbol,
-            trade?.outputAmount?.currency?.symbol,
-            getTradeVersion(trade)
-          ].join('/')
-        })
-      })
-      .catch(error => {
-        setSwapState({
-          attemptingTxn: false,
-          tradeToConfirm,
-          showConfirm,
-          swapErrorMessage: error.message,
-          txHash: undefined
-        })
-      })
-  }, [tradeToConfirm, account, priceImpactWithoutFee, recipient, recipientAddress, showConfirm, swapCallback, trade])
 
   const { t } = useTranslation()
 
@@ -359,39 +298,6 @@ export default function Swap() {
     onCurrencySelection
   ])
 
-  const currentInput =
-    currencies[Field.INPUT]?.symbol === 'ETH' ? 'ETH' : wrappedCurrency(currencies[Field.INPUT], chainId)?.address
-  const currentOutput =
-    currencies[Field.OUTPUT]?.symbol === 'ETH' ? 'ETH' : wrappedCurrency(currencies[Field.OUTPUT], chainId)?.address
-  const currentTheme = useGetTheme()
-
-  let currentURL =
-    currentInput !== 'ETH'
-      ? `https://varen.exchange/#/swap/?inputCurrency=${currentInput}`
-      : 'https://varen.exchange/#/swap'
-
-  if (currentOutput) {
-    currentURL += currentInput !== 'ETH' ? `&outputCurrency=${currentOutput}` : `?outputCurrency=${currentOutput}`
-  }
-
-  if (currentTheme !== 'default') {
-    currentURL += currentInput !== 'ETH' || currentOutput ? `&theme=${currentTheme}` : `?theme=${currentTheme}`
-  }
-
-  function copyInputMessage(val: string) {
-    const selBox = document.createElement('textarea')
-    selBox.style.position = 'fixed'
-    selBox.style.left = '0'
-    selBox.style.top = '0'
-    selBox.style.opacity = '0'
-    selBox.value = val
-    document.body.appendChild(selBox)
-    selBox.focus()
-    selBox.select()
-    document.execCommand('copy')
-    document.body.removeChild(selBox)
-  }
-
   const migrationLabel =
     isMigration && !!formattedAmounts[Field.INPUT]
       ? Number(formattedAmounts[Field.INPUT]) <= Number(maxAmountInput?.toExact())
@@ -401,14 +307,6 @@ export default function Swap() {
 
   return (
     <>
-      <TokenWarningModal
-        isOpen={urlLoadedTokens.length > 0 && !dismissTokenWarning && !isMigration}
-        tokens={urlLoadedTokens}
-        onConfirm={handleConfirmTokenWarning}
-      />
-      <NavigationCard>
-        <SwapPoolTabs active={'swap'} />
-      </NavigationCard>
       <AppBody>
         <Wrapper id="swap-page">
           <ConfirmSwapModal
@@ -420,7 +318,7 @@ export default function Swap() {
             txHash={txHash}
             recipient={recipient}
             allowedSlippage={allowedSlippage}
-            onConfirm={handleSwap}
+            onConfirm={()=>{console.log('confirm')}}
             swapErrorMessage={swapErrorMessage}
             onDismiss={handleConfirmDismiss}
           />
@@ -430,6 +328,7 @@ export default function Swap() {
               value={formattedAmounts[Field.INPUT]}
               showMaxButton={!atMaxAmountInput}
               currency={currencies[Field.INPUT]}
+              disableCurrencySelect={true}
               onUserInput={handleTypeInput}
               onMax={handleMaxInput}
               onCurrencySelect={handleInputSelect}
@@ -438,19 +337,15 @@ export default function Swap() {
             />
             <AutoColumn justify="space-between">
               <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
-                <ArrowWrapper clickable>
                   <ArrowDown
                     size="16"
-                    onClick={() => {
-                      setApprovalSubmitted(false) // reset 2 step UI for approvals
-                      onSwitchTokens()
-                      setInversed(!inversed)
+                    onClick={(e) => {
+                      e.preventDefault()
                     }}
                     color={
                       currencies[Field.INPUT] && currencies[Field.OUTPUT] ? theme.textHighlight : theme.textPrimary
                     }
                   />
-                </ArrowWrapper>
                 {recipient === null && !showWrap && isExpertMode && !isMigration && !isCounterMigration ? (
                   <LinkStyledButton id="add-recipient-button" onClick={() => onChangeRecipient('')}>
                     {t('addASend')}
@@ -461,6 +356,7 @@ export default function Swap() {
             <CurrencyInputPanel
               value={isMigration ? formattedAmounts[Field.INPUT] : formattedAmounts[Field.OUTPUT]}
               onUserInput={handleTypeOutput}
+              disableCurrencySelect={true}
               label={independentField === Field.INPUT && !showWrap && trade ? t('toEstimated') : t('to')}
               showMaxButton={false}
               currency={currencies[Field.OUTPUT]}
@@ -471,9 +367,7 @@ export default function Swap() {
             {recipient !== null && !showWrap && !isMigration && !isCounterMigration ? (
               <>
                 <AutoRow justify="space-between" style={{ padding: '0 1rem' }}>
-                  <ArrowWrapper clickable={false}>
                     <ArrowDown size="16" color={theme.textSecondary} />
-                  </ArrowWrapper>
                   <LinkStyledButton id="remove-recipient-button" onClick={() => onChangeRecipient(null)}>
                     {t('removeSend')}
                   </LinkStyledButton>
@@ -481,51 +375,6 @@ export default function Swap() {
                 <AddressInputPanel id="recipient" value={recipient} onChange={onChangeRecipient} />
               </>
             ) : null}
-            {showWrap || isMigration || isCounterMigration ? null : (
-              <Card padding={'.25rem .75rem 0 .75rem'} borderRadius={'20px'}>
-                <AutoColumn gap="4px">
-                  {Boolean(trade) && (
-                    <>
-                      <RowBetween>
-                        <TradePrice
-                          price={trade?.executionPrice}
-                          showInverted={true}
-                          priceImpactSeverity={priceImpactSeverity}
-                        />
-                        <QuestionHelper text={t('priceDescription')} />
-                      </RowBetween>
-                      <RowBetween>
-                        <TradePrice
-                          price={trade?.executionPrice}
-                          showInverted={false}
-                          priceImpactSeverity={priceImpactSeverity}
-                        />
-                      </RowBetween>
-                    </>
-                  )}
-                  {allowedSlippage !== INITIAL_ALLOWED_SLIPPAGE && (
-                    <RowBetween align="center">
-                      <ClickableText
-                        fontWeight={500}
-                        fontSize={14}
-                        color={theme.textSecondary}
-                        onClick={toggleSettings}
-                      >
-                        {t('slippageTolerance')}
-                      </ClickableText>
-                      <ClickableText
-                        fontWeight={500}
-                        fontSize={14}
-                        color={theme.textSecondary}
-                        onClick={toggleSettings}
-                      >
-                        {allowedSlippage / 100}%
-                      </ClickableText>
-                    </RowBetween>
-                  )}
-                </AutoColumn>
-              </Card>
-            )}
           </AutoColumn>
           <BottomGrouping>
             {!account ? (
@@ -594,9 +443,6 @@ export default function Swap() {
                   </ButtonConfirmed>
                   <ButtonError
                     onClick={() => {
-                      if (isExpertMode) {
-                        handleSwap()
-                      } else {
                         setSwapState({
                           tradeToConfirm: trade,
                           attemptingTxn: false,
@@ -604,7 +450,6 @@ export default function Swap() {
                           showConfirm: true,
                           txHash: undefined
                         })
-                      }
                     }}
                     width="48%"
                     id="swap-button"
@@ -626,21 +471,7 @@ export default function Swap() {
             ) : (
               <ButtonError
                 onClick={() => {
-                  if (isMigration) {
                     handleMigration()
-                  } else {
-                    if (isExpertMode) {
-                      handleSwap()
-                    } else {
-                      setSwapState({
-                        tradeToConfirm: trade,
-                        attemptingTxn: false,
-                        swapErrorMessage: undefined,
-                        showConfirm: true,
-                        txHash: undefined
-                      })
-                    }
-                  }
                 }}
                 id="swap-button"
                 disabled={
@@ -666,26 +497,6 @@ export default function Swap() {
             )}
             {showApproveFlow && isMigration && <ProgressSteps steps={[approvalMigration === ApprovalState.APPROVED]} />}
             {showApproveFlow && !isMigration && <ProgressSteps steps={[approval === ApprovalState.APPROVED]} />}
-            {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
-            <div style={{ marginTop: 12 }}>
-              <Text textAlign="center" fontSize={14} style={{ padding: '.5rem 0 .5rem 0' }}>
-                {copied === currentURL ? (
-                  <CopiedToClipboard>
-                    <CheckIcon /> {t('copied')}
-                  </CopiedToClipboard>
-                ) : (
-                  <CopyToClipboard
-                    onClick={() => {
-                      copyInputMessage(currentURL)
-                      setCopied(currentURL)
-                    }}
-                  >
-                    <CopyIcon /> {t('copyCurrentSelection')}
-                  </CopyToClipboard>
-                )}
-              </Text>
-            </div>
-            {/* {betterTradeLinkVersion && <BetterTradeLink version={betterTradeLinkVersion} />} */}
           </BottomGrouping>
         </Wrapper>
       </AppBody>
