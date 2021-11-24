@@ -354,7 +354,7 @@ export default function Swap() {
               </AutoRow>
             </AutoColumn>
             <CurrencyInputPanel
-              value={isMigration ? formattedAmounts[Field.INPUT] : formattedAmounts[Field.OUTPUT]}
+              value={formattedAmounts[Field.INPUT]}
               onUserInput={handleTypeOutput}
               disableCurrencySelect={true}
               label={independentField === Field.INPUT && !showWrap && trade ? t('toEstimated') : t('to')}
