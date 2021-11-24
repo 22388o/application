@@ -342,9 +342,6 @@ export default function Unstake({
   } else {
     return (
       <>
-        <NavigationCard>
-          <SwapPoolTabs active={'stake'} />
-        </NavigationCard>
         <AppBody>
           <Tabs>
             {!isSingle ? (

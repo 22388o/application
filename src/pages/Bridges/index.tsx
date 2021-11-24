@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { Text } from 'rebass'
-import { BlueCard, NavigationCard } from '../../components/Card'
-import { SwapPoolTabs } from '../../components/NavigationTabs'
+import { BlueCard } from '../../components/Card'
 import AppBody from '../AppBody'
 import { ThemeContext } from 'styled-components'
 import { useTranslation } from 'react-i18next'
@@ -96,9 +95,6 @@ export default function Bridges() {
 
   return (
     <>
-      <NavigationCard>
-        <SwapPoolTabs active={'none'} />
-      </NavigationCard>
       <AppBody>
         <AutoColumn gap={'12px'}>
           <RowBetween>

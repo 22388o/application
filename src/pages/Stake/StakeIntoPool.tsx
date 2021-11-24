@@ -384,9 +384,6 @@ export default function StakeIntoPool({
   } else {
     return (
       <>
-        <NavigationCard>
-          <SwapPoolTabs active={'stake'} />
-        </NavigationCard>
         <AppBody>
           <Tabs>
             {!isSingle ? (

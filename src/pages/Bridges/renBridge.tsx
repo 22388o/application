@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { Text } from 'rebass'
 import { BlueCard, NavigationCard } from '../../components/Card'
-import { SwapPoolTabs } from '../../components/NavigationTabs'
 import AppBody from '../AppBody'
 import styled, { ThemeContext } from 'styled-components'
 import RenJS from '@renproject/ren'
@@ -376,9 +375,7 @@ export default function RenBridge({
   return (
     <>
       <BridgeWarningModal isOpen={!dismissBridgeWarning} onConfirm={handleConfirmBridgeWarning} />
-      <NavigationCard>
-        <SwapPoolTabs active={'none'} />
-      </NavigationCard>
+
       <AppBody>
         <AutoColumn gap={'12px'}>
           <BackButton>

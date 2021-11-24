@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styled, { ThemeContext } from 'styled-components'
-import { SwapPoolTabs } from '../../components/NavigationTabs'
-import Card from '../../components/Card'
 import { AutoColumn } from '../../components/Column'
 import { useActiveWeb3React } from '../../hooks'
 import AppBody from '../AppBody'
@@ -239,9 +237,6 @@ export default function Buy() {
   })
   return (
     <>
-      <Card style={{ maxWidth: '420px', padding: '12px', backgroundColor: theme.navigationBG, marginBottom: '16px' }}>
-        <SwapPoolTabs active={'buy'} />
-      </Card>
       <AppBody>
         <AutoColumn gap="lg" justify="center">
           <RowBetween>

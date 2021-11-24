@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Text } from 'rebass'
 import Card, { BlueCard } from '../../components/Card'
-import { SwapPoolTabs } from '../../components/NavigationTabs'
 import AppBody from '../AppBody'
 import styled, { ThemeContext } from 'styled-components'
 import { useTranslation } from 'react-i18next'
@@ -273,9 +272,7 @@ export default function StakeGovernance() {
 
   return (
     <>
-      <Card style={{ maxWidth: '420px', padding: '12px', backgroundColor: theme.navigationBG, marginBottom: '16px' }}>
-        <SwapPoolTabs active={'stake'} />
-      </Card>
+
       <AppBody>
         <AutoColumn gap={'12px'}>
           <RowBetween>

@@ -6,7 +6,6 @@ import { ButtonDropdownLight } from '../../components/Button'
 import { LightCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
 import CurrencyLogo from '../../components/CurrencyLogo'
-import { FindPoolTabs } from '../../components/NavigationTabs'
 import { MinimalPositionCard } from '../../components/PositionCard'
 import Row from '../../components/Row'
 import CurrencySearchModal from '../../components/SearchModal/CurrencySearchModal'
@@ -86,7 +85,6 @@ export default function PoolFinder() {
 
   return (
     <AppBody>
-      <FindPoolTabs />
       <AutoColumn gap="md">
         <ButtonDropdownLight
           onClick={() => {

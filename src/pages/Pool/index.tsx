@@ -2,10 +2,6 @@ import React, { useContext, useEffect, useMemo } from 'react'
 import { ThemeContext } from 'styled-components'
 import { Pair } from '@uniswap/sdk'
 import { Link } from 'react-router-dom'
-import { SwapPoolTabs } from '../../components/NavigationTabs'
-
-import { NavigationCard } from '../../components/Card'
-
 import Question from '../../components/QuestionHelper'
 import FullPositionCard from '../../components/PositionCard'
 import { useTokenBalancesWithLoadingIndicator } from '../../state/wallet/hooks'
@@ -70,9 +66,6 @@ export default function Pool() {
   const { t } = useTranslation()
   return (
     <>
-      <NavigationCard>
-        <SwapPoolTabs active={'pool'} />
-      </NavigationCard>
       <AppBody>
         <AutoColumn gap="lg" justify="center">
           <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} to="/add/ETH">
