@@ -48,6 +48,14 @@ const Text = styled.p`
   line-height: 18px;
 `
 
+const SmallText = styled.p`
+  width: 100%;
+  margin: 5px 10px 5px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 18px;
+`
+
 export default function Swap() {
   return (
     <AppBody>
@@ -88,9 +96,14 @@ export default function Swap() {
           </RowBetween>
           <RowBetween>
             <Text>
-              If you still own $YFL tokens, that entered your wallet before the 16th of December 2021, feel free to use
+              If you still own $YFL* tokens, that entered your wallet before the 16th of December 2021, feel free to use
               the new (manual) migration process, by clicking the "Migrate YFL to VRN" button below.
             </Text>
+          </RowBetween>
+          <RowBetween>
+            <SmallText>
+              * You can also apply to migrate yYFL, that was staked prior to 12/16/2021, in the ratio of 1:1
+            </SmallText>
           </RowBetween>
           <RowBetween>
             <ExternalButton href="https://docs.google.com/forms/d/e/1FAIpQLSfO49524F2ackrFuyImT1ih1f8KVQLWZOKkpXJFBSLrBNtAmA/viewform" target="_blank">
