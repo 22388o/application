@@ -241,8 +241,18 @@ export default function StakeGovernance() {
               }
             }
           })
-          setDaysSinceLastDistribution(daysSince)
-          setReceivedVRNManual(VRNManual)
+          getIncomingTransactions('0x38f10aC1d8512fCCDF5C0201cEF1cBd76D9811B3').then((transactions) => {
+            transactions.forEach(function (transaction: Record<string, any>) {
+              if (transaction.to === governanceAddress.toLowerCase()) {
+                VRNManual += Number(transaction.value)
+                if (daysSince === 0 || moment().diff(moment.unix(transaction.timeStamp), 'days') < daysSince) {
+                  daysSince = moment().diff(moment.unix(transaction.timeStamp), 'days')
+                }
+              }
+            })
+            setDaysSinceLastDistribution(daysSince)
+            setReceivedVRNManual(VRNManual)
+          })
         })
       })
     }
