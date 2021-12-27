@@ -109,9 +109,9 @@ async function getBlockCountDown(targetBlock: number) {
     const response = await fetch(url, {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      method: 'POST'
+      method: 'POST',
     })
 
     if (response.ok) {
@@ -136,9 +136,9 @@ async function getIncomingTransactions(senderAddress: string) {
     const response = await fetch(url, {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      method: 'POST'
+      method: 'POST',
     })
 
     if (response.ok) {
@@ -200,10 +200,10 @@ export default function StakeGovernance() {
     if (yvrnPrice === 0) {
       const getPricePerFullShareMethod: (...args: any) => Promise<BigNumber> = govContract.getPricePerFullShare
       getPricePerFullShareMethod()
-        .then(response => {
+        .then((response) => {
           setYVrnPrice(hexStringToNumber(response.toHexString(), yVRN.decimals))
         })
-        .catch(e => {
+        .catch((e) => {
           setYVrnPrice(1)
           console.log(e)
         })
@@ -212,8 +212,8 @@ export default function StakeGovernance() {
     if (account) {
       const earlyWithdrawalFeeExpiryMethod: (...args: any) => Promise<BigNumber> = govContract.earlyWithdrawalFeeExpiry
       const args: Array<string> = [account]
-      earlyWithdrawalFeeExpiryMethod(...args).then(response => {
-        getBlockCountDown(hexStringToNumber(response.toHexString(), 0)).then(countdown => {
+      earlyWithdrawalFeeExpiryMethod(...args).then((response) => {
+        getBlockCountDown(hexStringToNumber(response.toHexString(), 0)).then((countdown) => {
           setFeeCountdown(now + Math.ceil(countdown))
           setFeeCountdownFetched(true)
         })
@@ -221,19 +221,32 @@ export default function StakeGovernance() {
     }
 
     if (receivedVRNManual === 0) {
-      getIncomingTransactions('0x0389d755C1833C9b350d4E8B619Eae16deFc1CbA').then(transactions => {
+      getIncomingTransactions('0x0389d755C1833C9b350d4E8B619Eae16deFc1CbA').then((transactions) => {
         let VRNManual = 0
-        transactions.forEach(function(transaction: Record<string, any>) {
+        let daysSince = 0
+        transactions.forEach(function (transaction: Record<string, any>) {
           if (transaction.to === governanceAddress.toLowerCase()) {
             VRNManual += Number(transaction.value)
-            setDaysSinceLastDistribution(moment().diff(moment.unix(transaction.timeStamp), 'days'))
+            if (daysSince === 0 || moment().diff(moment.unix(transaction.timeStamp), 'days') < daysSince) {
+              daysSince = moment().diff(moment.unix(transaction.timeStamp), 'days')
+            }
           }
         })
-        setReceivedVRNManual(VRNManual)
+        getIncomingTransactions('0x9dab4dfabc5eca084ffdd386a7b676f2b61bd871').then((transactions) => {
+          transactions.forEach(function (transaction: Record<string, any>) {
+            if (transaction.to === governanceAddress.toLowerCase()) {
+              VRNManual += Number(transaction.value)
+              if (daysSince === 0 || moment().diff(moment.unix(transaction.timeStamp), 'days') < daysSince) {
+                daysSince = moment().diff(moment.unix(transaction.timeStamp), 'days')
+              }
+            }
+          })
+          setDaysSinceLastDistribution(daysSince)
+          setReceivedVRNManual(VRNManual)
+        })
       })
     }
   }
-
   if (lastMonthBlockNumber !== 0 && yvrnPriceLastMonth === 0) {
     const web3 = new Web3(new Web3.providers.HttpProvider(NETWORK_URL))
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -272,7 +285,6 @@ export default function StakeGovernance() {
 
   return (
     <>
-
       <AppBody>
         <AutoColumn gap={'12px'}>
           <RowBetween>
